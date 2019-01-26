@@ -1,9 +1,5 @@
 <?php
 
-  // The location of /controllers and /templates must
-  // be part of PHP's include path
-  set_include_path(__DIR__);
-
   // Include the Rapid library
   require_once('lib/Rapid.php');
 

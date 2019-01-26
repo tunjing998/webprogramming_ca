@@ -16,6 +16,6 @@
   $app->GET('/example', 'Example');
 
   // Process the request
-  $app->dispatch(new \Rapid\Request());
+  $app->dispatch();
 
 ?>

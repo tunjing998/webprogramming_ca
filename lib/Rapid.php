@@ -397,11 +397,12 @@
      *   3) Loads and calls the controller (or throws)
      * @param $req a Rapid Request Object
      */
-    public function dispatch($req) {
+    public function dispatch() {
 
-      $controller = NULL;
-      $routes     = $this->routes[$req->method()] ?? [];
+      $req        = new Request();
       $res        = new Response($this);
+      $routes     = $this->routes[$req->method()] ?? [];
+      $controller = NULL;
 
       // Is there a matching route declaration?
       foreach($routes as $route=>$controllerName) {

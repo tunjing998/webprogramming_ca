@@ -1,19 +1,28 @@
 # Rapid PHP MVC Library
 This is the **Rapid** PHP MVC library created for GD2/CO2a Web Development (2018/19) CA3. This version has no in-built support or helpers for Models, so it is really just a VC framework at this point (we'll add model support later).
 
-## Using this Library
+On this page:
+
+* [Getting Started](#getting-started)
+* [Working with Controllers](#working-with-controllers)
+* [Working with Templates](#working-with-templates)
+* [Working with the Router](#working-with-the-router)
+* [Exception Handling](#exception-handling)
+* [Reporting Bugs](#reporting-bugs)
+
+## Getting Started
 @TODO
 
-### Working with Controllers
+## Working with Controllers
 @TODO
 
-### Working with Templates
+## Working with Templates
 @TODO
 
-### Working with the Router
+## Working with the Router
 @TODO
 
-### Exception Handling
+## Exception Handling
 Rapid defines it's own class of Exception objects which *may* have request and response objects attached to them for usage in catch blocks. If these objects are available, you should use them to handle errors internally in the framework. The following example demonstrates a structure for your `index.php`, and there is an assumption that there is a `main` layout, and an `error` view:
 
 ```php
@@ -76,17 +85,5 @@ Exception                         | Description
 `getRequestObject()`              | Get the Rapid Request object. `NULL` if an exception was thrown before dispatching
 `getResponseObject()`             | Get the Rapid Response object. `NULL` if an exception was thrown before dispatching
 
-## Components
-@TODO
-
-### The Request Object
-@TODO
-
-### The Response Object
-@TODO
-
-### The Router Object
-@TODO
-
 ## Reporting Bugs
-@TODO
+To report bugs in the library, report them on the [Issues Page](https://gitlab.comp.dkit.ie/gavins/rapid-starter-project/issues) on GitLab, or email them to **shane.gavin@dkit.ie**.

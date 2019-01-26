@@ -202,6 +202,30 @@
       ];
     }
 
+    /**
+     * Register a new GET-based route
+     */
+    public function GET($route, $controllerName) {
+
+      if (isset($this->routes['GET'][$route])) {
+        throw new \Exception('Rapid: GET Route redeclaration attempt');
+      }
+
+      $this->routes['GET'][$route] = $controllerName;
+    }
+
+    /**
+     * Register a new POST-based route
+     */
+    public function POST($route, $controllerName) {
+
+      if (in_array($route, $this->routes['POST'])) {
+        throw new \Exception('Rapid: POST Route redeclaration attempt');
+      }
+
+      $this->routes['POST'][$route] = $controllerName;
+    }
+
   }
 
 ?>

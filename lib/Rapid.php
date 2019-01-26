@@ -94,6 +94,66 @@
       }
     }
 
+    /**
+     * Get a single named parameter from the request URL
+     */
+    public function param($name) {
+      return $this->params !== NULL
+        ? $this->params[$name] ?? NULL
+        : NULL;
+    }
+
+    /**
+     * Get a single named query string value from the request
+     * URL. (->query('foo') is an alias of $_GET['foo'])
+     */
+    public function query($name) {
+      return $this->query[$name] ?? NULL;
+    }
+
+    /**
+     * Get a single named posted value from the request
+     * (->body('foo') is an alias of $_POST['foo'])
+     */
+    public function body($name) {
+      return $this->body[$name] ?? NULL;
+    }
+
+    /**
+     * Get a single, named request header
+     */
+    public function header($name) {
+      return $this->headers[$name] ?? NULL;
+    }
+
+    /**
+     * Get the requesting user's IP address
+     */
+    public function remoteIp() {
+      return $this->remoteIp;
+    }
+
+    /**
+     * Get the calculated request path (minus base path)
+     */
+    public function url() {
+      return $this->url;
+    }
+
+    /**
+     * Get the request method (GET/POST/PUT, etc.)
+     */
+    public function method() {
+      return $this->method;
+    }
+
+    /**
+     * Get the app's base path (relation to doc root)
+     */
+    public function basePath() {
+      return $this->basePath;
+    }
+
   }
 
 

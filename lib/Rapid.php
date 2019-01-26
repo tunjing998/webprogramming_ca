@@ -229,6 +229,28 @@
       $this->finished = TRUE;
     }
 
+    /**
+     * Send a response to the user. This method takes care
+     * of setting the current response code, any defined
+     * response headers, and the block of provided content
+     */
+    public function send($content = '') {
+
+      if ($this->finished) {
+        throw new \Exception('Request is already finsihed');
+      }
+
+      http_response_code($this->status);
+
+      foreach($this->headers as $header=>$content) {
+        header("$header: $content");
+      }
+
+      echo $content;
+
+      $this->end();
+    }
+
   }
 
 

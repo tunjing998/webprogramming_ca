@@ -380,7 +380,7 @@
 
       $controller = NULL;
       $routes     = $this->routes[$req->method()] ?? [];
-      $res        = NULL; // @TODO we need a response object
+      $res        = new Response($this);
 
       // Is there a matching route declaration?
       foreach($routes as $route=>$controllerName) {

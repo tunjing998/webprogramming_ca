@@ -28,6 +28,10 @@ Rapid defines it's own class of Exception objects which *may* have request and r
 ```php
 <?php
 
+  // There's a lot of code repetition in here to cover
+  // all scenarios -- this could be reduced. I look forward
+  // to seeing your ideas for doing so in your submission
+
   try {
     // All set-up and dispatching here
   }
@@ -39,14 +43,24 @@ Rapid defines it's own class of Exception objects which *may* have request and r
     // there are no request or response objects.
     // Throw the error onward
     if ($e->getResponseObject() === NULL) {
-      throw $e;
+      http_response_code(500);
+      exit();
     }
 
-    $e->getResponseObject()->status(500);
-    $e->getResponseObject()->render('main', 'error', [
-      'message' => $e->getMessage();
-      'code'    => $e->getCode();
-    ]);
+    // Deal with the error in the framework
+    // A helper which hid the extra catches here would
+    // be a good idea.
+    try {
+      $e->getResponseObject()->status(500);
+      $e->getResponseObject()->render('main', 'error', [
+        'message' => $e->getMessage();
+        'code'    => $e->getCode();
+      ]);
+    } catch (Exception $e) {
+      http_response_code(500);
+      exit();
+    }
+
   }
 
   // Final, fatal Exception handler

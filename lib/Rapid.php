@@ -168,7 +168,7 @@
   class Response {
 
     public function __construct() {
-      throw new Exception('Response class has not yet been implemented');
+      throw new \Exception('Response class has not yet been implemented');
     }
 
   }
@@ -181,7 +181,7 @@
   class Renderer {
 
     public function __construct() {
-      throw new Exception('Renderer class has not yet been implemented');
+      throw new \Exception('Renderer class has not yet been implemented');
     }
 
   }

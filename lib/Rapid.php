@@ -182,6 +182,28 @@
       $this->router   = $router;
     }
 
+    /**
+     * Returns the current internal state of the response
+     * object (status, headers, finished) for inspection
+     */
+    public function currentState() {
+      return [
+        'status'   => $this->status,
+        'headers'  => $this->headers,
+        'finished' => $this->finished
+      ];
+    }
+
+    /**
+     * Set the response HTTP status code (defaults to 200)
+     */
+    public function status($status) {
+      if ($this->finished) {
+        throw new \Exception('Request is already finsihed');
+      }
+      $this->status = $status;
+    }
+
   }
 
 

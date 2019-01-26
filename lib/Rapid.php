@@ -25,17 +25,6 @@
    *    Will work : new \Rapid\Request();
    * Lear more about namespaces at:
    *    https://php.net/manual/en/language.namespaces.php
-   *
-   * There are shortcoming in this implementation which we
-   * will need to fix going forward. Some examples:
-   *
-   *    1) Error handling isn't great. If we catch a Rapid
-   *       Exception, we have no way of retrieving Request
-   *       and Response objects to deal with it inside of
-   *       the framework (should be an easy fix)
-   *    2) There is some coupling between Router, Request
-   *       and Response, which it might be possible to
-   *       improve with a little refactoring.
    */
 
   ##########################################################
@@ -50,7 +39,32 @@
   ##########################################################
 
   // A \Rapid\Exception which extends the global \Exception
-  class Exception extends \Exception {};
+  class Exception extends \Exception {
+
+    private $req = NULL;
+    private $res = NULL;
+
+    public function appendRequestObject($req) {
+      if ($req instanceof Request) {
+        $this->req = $req;
+      }
+    }
+
+    public function appendResponseObject($res) {
+      if ($res instanceof Response) {
+        $this->res = $res;
+      }
+    }
+
+    public function getRequestObject() {
+      return $this->req;
+    }
+
+    public function getResponseObject() {
+      return $this->res;
+    }
+
+  };
 
   // Situation-specific Exception types
   class RequestAlreadyFinishedException extends Exception {};
@@ -404,29 +418,41 @@
       $routes     = $this->routes[$req->method()] ?? [];
       $controller = NULL;
 
-      // Is there a matching route declaration?
-      foreach($routes as $route=>$controllerName) {
+      try {
 
-        $normal_pattern = '@^' . rtrim($route, '/') . '/?$@';
-        $matches        = NULL;
-        $matched        = preg_match($normal_pattern, $req->url(), $matches);
+        // Is there a matching route declaration?
+        foreach($routes as $route=>$controllerName) {
 
-        // If found, rry to include the contoller
-        if ($matched) {
-          $controller = @include_once("controllers/$controllerName.php");
-          $req->setParamsOnce($matches);
-          break;
+          $normal_pattern = '@^' . rtrim($route, '/') . '/?$@';
+          $matches        = NULL;
+          $matched        = preg_match($normal_pattern, $req->url(), $matches);
+
+          // If found, rry to include the contoller
+          if ($matched) {
+            $controller = @include_once("controllers/$controllerName.php");
+            $req->setParamsOnce($matches);
+            break;
+          }
         }
-      }
 
-      // No valid controller was found
-      if (!is_callable($controller)) {
-        throw new ControllerNotFoundException();
-      }
+        // No valid controller was found
+        if (!is_callable($controller)) {
+          throw new ControllerNotFoundException();
+        }
 
-      // Otherwise, we're all good to go.
-      // The controller will handle the request
-      return $controller($req, $res);
+        // Otherwise, we're all good to go.
+        // The controller will handle the request
+        return $controller($req, $res);
+
+      } catch(Exception $e) {
+
+        // For Rapid Exceptions, make the $req and $res object available
+        $e->appendRequestObject($req);
+        $e->appendResponseObject($res);
+
+        // Then throw the exception onward
+        throw $e;
+      }
     }
 
   }

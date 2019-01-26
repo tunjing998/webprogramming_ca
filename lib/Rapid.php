@@ -14,6 +14,10 @@
    * To limit the number of requires needed per request,
    * all of this library in included in this one file.
    *
+   * The current implementation only supports GET and POST
+   * request methods. Would it be difficult to add support
+   * for the remaining request methods (PUT, DELETE, etc)?
+   *
    * This library makes use of a namespace. To access the
    * classes in this library, you must reference their
    * namespace:

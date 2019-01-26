@@ -38,6 +38,16 @@
   # Exceptions
   ##########################################################
 
+  // A \Rapid\Exception which extends the global \Exception
+  class Exception extends \Exception {};
+
+  // Situation-specific Exception types
+  class RequestAlreadyFinishedException extends Exception {};
+  class LayoutNotFoundException         extends Exception {};
+  class ViewNotFoundException           extends Exception {};
+  class RouteRedeclarationException     extends Exception {};
+  class ControllerNotFoundException     extends Exception {};
+
 
   ##########################################################
   # Request
@@ -199,7 +209,7 @@
      */
     public function status($status) {
       if ($this->finished) {
-        throw new \Exception('Request is already finsihed');
+        throw new RequestAlreadyFinishedException();
       }
       $this->status = $status;
     }
@@ -211,7 +221,7 @@
     public function header($name, $value) {
 
       if ($this->finished) {
-        throw new \Exception('Request is already finsihed');
+        throw new RequestAlreadyFinishedException();
       }
 
       if($value === NULL) {
@@ -237,7 +247,7 @@
     public function send($content = '') {
 
       if ($this->finished) {
-        throw new \Exception('Request is already finsihed');
+        throw new RequestAlreadyFinishedException();
       }
 
       http_response_code($this->status);
@@ -257,7 +267,7 @@
      */
     public function render($layout, $view, $locals) {
       if ($this->finished) {
-        throw new \Exception('Request is already finsihed');
+        throw new RequestAlreadyFinishedException();
       }
       $html = Renderer::compile($layout, $view, $locals);
       $this->send($html);
@@ -269,7 +279,7 @@
      */
     public function redirect($uri) {
       if ($this->finished) {
-        throw new \Exception('Request is already finsihed');
+        throw new RequestAlreadyFinishedException();
       }
       $uri = rtrim($this->router->basePath(), '/') . '/' . ltrim($uri, '/');
       header("Location: $uri");
@@ -313,12 +323,12 @@
 
       // Layout could not be found, or opened, or is empty
       if (!$layoutIncluded) {
-        throw new \Exception('Layout file could not be found');
+        throw new LayoutNotFoundException();
       }
 
       // View could not be found, or opened, or is empty
       if (!$viewIncluded) {
-        throw new \Exception('View file could not be found');
+        throw new ViewNotFoundException;
       }
 
       // Combine layout and view
@@ -351,7 +361,7 @@
     public function GET($route, $controllerName) {
 
       if (isset($this->routes['GET'][$route])) {
-        throw new \Exception('Rapid: GET Route redeclaration attempt');
+        throw new RouteRedeclarationException();
       }
 
       $this->routes['GET'][$route] = $controllerName;
@@ -363,7 +373,7 @@
     public function POST($route, $controllerName) {
 
       if (in_array($route, $this->routes['POST'])) {
-        throw new \Exception('Rapid: POST Route redeclaration attempt');
+        throw new RouteRedeclarationException();
       }
 
       $this->routes['POST'][$route] = $controllerName;
@@ -399,7 +409,7 @@
 
       // No valid controller was found
       if (!is_callable($controller)) {
-        throw new \Exception('Controller could not be found or is not callable');
+        throw new ControllerNotFoundException();
       }
 
       // Otherwise, we're all good to go.

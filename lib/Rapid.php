@@ -167,8 +167,19 @@
 
   class Response {
 
-    public function __construct() {
-      throw new \Exception('Response class has not yet been implemented');
+    public const DEFAULT_STATUS  = 200;
+    public const DEFAULT_HEADERS = [];
+
+    private $router;
+    private $status;
+    private $headers;
+    private $finished;
+
+    public function __construct($router) {
+      $this->status(Response::DEFAULT_STATUS);
+      $this->headers  = Response::DEFAULT_HEADERS;
+      $this->finished = FALSE;
+      $this->router   = $router;
     }
 
   }

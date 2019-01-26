@@ -58,7 +58,40 @@
       $this->headers   = getallheaders();
       $this->remoteIp  = $_SERVER['REMOTE_ADDR'];
       $this->method    = $_SERVER['REQUEST_METHOD'];
-      $this->url       = NULL;
+      $this->url       = $this->getLocalPath();
+    }
+
+    /**
+     * Utility method to get the requested path, minus the base
+     * path of the current script (relative to the document root).
+     */
+    private function getLocalPath() {
+
+      // Get requested path, minus a query string if there is one
+      $localPath = explode('?', $_SERVER['REQUEST_URI'])[0];
+
+      // Get requested path, minus the fragment string if there is one
+      $localPath = explode('#', $localPath)[0];
+
+      // Remove basePath from localPath
+      // Snippet taken from https://stackoverflow.com/questions/4517067
+      // ^^^ That's a reference
+      if (substr($localPath, 0, strlen($this->basePath)) === $this->basePath) {
+        $localPath = substr($localPath, strlen($this->basePath));
+      }
+
+      return $localPath;
+    }
+
+    /**
+     * Params will have to be set later than instantiation.
+     * However, once set, we don't want the param array to be
+     * mutable, so we will make sure they can only be set once
+     */
+    public function setParamsOnce($params) {
+      if ($this->params === NULL && is_array($params)) {
+        $this->params = $params;
+      }
     }
 
   }

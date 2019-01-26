@@ -25,6 +25,17 @@
    *    Will work : new \Rapid\Request();
    * Lear more about namespaces at:
    *    https://php.net/manual/en/language.namespaces.php
+   *
+   * There are shortcoming in this implementation which we
+   * will need to fix going forward. Some examples:
+   *
+   *    1) Error handling isn't great. If we catch a Rapid
+   *       Exception, we have no way of retrieving Request
+   *       and Response objects to deal with it inside of
+   *       the framework (should be an easy fix)
+   *    2) There is some coupling between Router, Request
+   *       and Response, which it might be possible to
+   *       improve with a little refactoring.
    */
 
   ##########################################################

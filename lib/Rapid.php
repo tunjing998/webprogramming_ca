@@ -251,6 +251,18 @@
       $this->end();
     }
 
+    /**
+     * Compile the specified template, and send the content
+     * to the user. Wraps the view compile stage, and a send
+     */
+    public function render($layout, $view, $locals) {
+      if ($this->finished) {
+        throw new \Exception('Request is already finsihed');
+      }
+      $html = Renderer::compile($layout, $view, $locals);
+      $this->send($html);
+    }
+
   }
 
 

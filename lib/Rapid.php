@@ -226,6 +226,42 @@
       $this->routes['POST'][$route] = $controllerName;
     }
 
+    /**
+     * Processes a request by:
+     *   1) Creating a new request object
+     *   2) Checks if the requested route has a controller
+     *   3) Loads and calls the controller (or throws)
+     * @param $req a Rapid Request Object
+     */
+    public function dispatch($req) {
+
+      $controller = NULL;
+      $routes     = $this->routes[$req->method()] ?? [];
+      $res        = NULL; // @TODO we need a response object
+
+      // Is there a matching route declaration?
+      foreach($routes as $route=>$controllerName) {
+
+        $normal_pattern = '@^' . rtrim($route, '/') . '/?$@';
+        $matched        = preg_match($normal_pattern, $req->url());
+
+        // If found, rry to include the contoller
+        if ($matched) {
+          $controller = @include_once("controllers/$controllerName.php");
+          break;
+        }
+      }
+
+      // No valid controller was found
+      if (!is_callable($controller)) {
+        throw new \Exception('Controller could not be found or is not callable');
+      }
+
+      // Otherwise, we're all good to go.
+      // The controller will handle the request
+      return $controller($req, $res);
+    }
+
   }
 
 ?>

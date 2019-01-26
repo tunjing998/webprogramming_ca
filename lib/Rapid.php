@@ -41,6 +41,15 @@
 
   class Request {
 
+    private $basePath;
+    private $params;
+    private $query;
+    private $body;
+    private $headers;
+    private $remote_ip;
+    private $method;
+    private $url;
+
     public function __construct() {
       throw new Exception('Request class has not yet been implemented');
     }

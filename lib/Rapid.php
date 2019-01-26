@@ -180,6 +180,8 @@
 
   class Renderer {
 
+    public const VIEW_PLACEHOLDER = '{{--VIEW--}}';
+
     public function __construct() {
       throw new \Exception('Renderer class has not yet been implemented');
     }

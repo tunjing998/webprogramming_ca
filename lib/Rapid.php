@@ -221,6 +221,14 @@
       }
     }
 
+    /**
+     * Set the response as finished. This will prevent most
+     * response actions from doing anything.
+     */
+    public function end() {
+      $this->finished = TRUE;
+    }
+
   }
 
 

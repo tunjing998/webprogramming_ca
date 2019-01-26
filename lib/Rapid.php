@@ -182,6 +182,46 @@
 
     public const VIEW_PLACEHOLDER = '{{--VIEW--}}';
 
+    /**
+     * Compile the parts of a template (layout and view) to their
+     * final form (e.g. HTML) and return the result. Will throw if
+     * any template part could not be found. 
+     * @param $layoutName The name of the layout file to use (excl. .php)
+     * @param $viewName   The name of the view file to use (excl. .php)
+     * @param $locals     Associative array of values to make available to
+     *                    the template. 
+     */
+    public static function compile($layoutName, $viewName, $locals = []) {
+
+      $view   = NULL;
+      $layout = NULL;
+  
+      // Use object buffering to load the contents into a varibale
+      ob_start();
+        $layoutIncluded = @include_once("templates/layouts/$layoutName.php");
+        $layout         = ob_get_clean();
+      
+      // Use object buffering to load the contents into a varibale
+      ob_start();
+        $viewIncluded = @include_once("templates/views/$viewName.php");
+        $view         = ob_get_clean();
+  
+      // Layout could not be found, or opened, or is empty 
+      if (!$layoutIncluded) {
+        throw new \Exception('Layout file could not be found');
+      }
+  
+      // View could not be found, or opened, or is empty 
+      if (!$viewIncluded) {
+        throw new \Exception('View file could not be found');
+      }
+  
+      // Combine layout and view
+      $compiled = str_replace(Renderer::VIEW_PLACEHOLDER, $view, $layout);
+  
+      return $compiled;
+    }
+
   }
 
 

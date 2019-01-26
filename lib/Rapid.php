@@ -51,6 +51,7 @@
     private $url;
 
     public function __construct() {
+      $this->basePath  = dirname($_SERVER['PHP_SELF']);
       $this->params    = NULL;
       $this->query     = $_GET;
       $this->body      = $_POST;

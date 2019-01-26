@@ -263,6 +263,19 @@
       $this->send($html);
     }
 
+    /**
+     * Redirect the user to a specific URL. NB is aware
+     * of the base URL, so you do not have to include it.
+     */
+    public function redirect($uri) {
+      if ($this->finished) {
+        throw new \Exception('Request is already finsihed');
+      }
+      $uri = rtrim($this->router->basePath(), '/') . '/' . ltrim($uri, '/');
+      header("Location: $uri");
+      exit();
+    }
+
   }
 
 

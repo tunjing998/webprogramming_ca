@@ -243,11 +243,13 @@
       foreach($routes as $route=>$controllerName) {
 
         $normal_pattern = '@^' . rtrim($route, '/') . '/?$@';
-        $matched        = preg_match($normal_pattern, $req->url());
+        $matches        = NULL;
+        $matched        = preg_match($normal_pattern, $req->url(), $matches);
 
         // If found, rry to include the contoller
         if ($matched) {
           $controller = @include_once("controllers/$controllerName.php");
+          $req->setParamsOnce($matches);
           break;
         }
       }

@@ -1,6 +1,6 @@
 <?php
 
-  // The location of /controller and /templates must
+  // The location of /controllers and /templates must
   // be part of PHP's include path
   set_include_path(__DIR__);
 

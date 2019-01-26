@@ -407,9 +407,9 @@
     /**
      * Processes a request by:
      *   1) Creating a new request object
+     *   1) Creating a new response object
      *   2) Checks if the requested route has a controller
      *   3) Loads and calls the controller (or throws)
-     * @param $req a Rapid Request Object
      */
     public function dispatch() {
 

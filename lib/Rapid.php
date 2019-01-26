@@ -51,7 +51,13 @@
     private $url;
 
     public function __construct() {
-      throw new Exception('Request class has not yet been implemented');
+      $this->params    = NULL;
+      $this->query     = $_GET;
+      $this->body      = $_POST;
+      $this->headers   = getallheaders();
+      $this->remoteIp  = $_SERVER['REMOTE_ADDR'];
+      $this->method    = $_SERVER['REQUEST_METHOD'];
+      $this->url       = NULL;
     }
 
   }

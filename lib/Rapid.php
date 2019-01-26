@@ -72,6 +72,7 @@
   class ViewNotFoundException           extends Exception {};
   class RouteRedeclarationException     extends Exception {};
   class ControllerNotFoundException     extends Exception {};
+  class RouteNotFoundException          extends Exception {};
 
 
   ##########################################################
@@ -417,6 +418,7 @@
       $res        = new Response($this);
       $routes     = $this->routes[$req->method()] ?? [];
       $controller = NULL;
+      $routeFound = FALSE;
 
       try {
 
@@ -429,10 +431,16 @@
 
           // If found, rry to include the contoller
           if ($matched) {
+            $routeFound = TRUE;
             $controller = @include_once("controllers/$controllerName.php");
             $req->setParamsOnce($matches);
             break;
           }
+        }
+
+        // No matching route found
+        if (!$routeFound) {
+          throw new RouteNotFoundException();
         }
 
         // No valid controller was found

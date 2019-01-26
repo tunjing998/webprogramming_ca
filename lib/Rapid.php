@@ -189,8 +189,13 @@
 
   class Router {
 
+    private $routes;
+
     public function __construct() {
-      throw new Exception('Router class has not yet been implemented');
+      $this->routes = [
+        'GET'  => [],
+        'POST' => []
+      ];
     }
 
   }

@@ -204,6 +204,23 @@
       $this->status = $status;
     }
 
+    /**
+     * Set a response header in the format (name, value).
+     * Pass a value of NULL to unset a named header.
+     */
+    public function header($name, $value) {
+
+      if ($this->finished) {
+        throw new \Exception('Request is already finsihed');
+      }
+
+      if($value === NULL) {
+        unset($this->headers[$name]);
+      } else {
+        $this->headers[$name] = $value;
+      }
+    }
+
   }
 
 

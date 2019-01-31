@@ -86,7 +86,7 @@
     private $query;
     private $body;
     private $headers;
-    private $remote_ip;
+    private $remoteIp;
     private $method;
     private $url;
 

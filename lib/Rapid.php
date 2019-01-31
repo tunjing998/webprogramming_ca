@@ -398,7 +398,7 @@
      */
     public function POST($route, $controllerName) {
 
-      if (in_array($route, $this->routes['POST'])) {
+      if (isset($this->routes['POST'][$route])) {
         throw new RouteRedeclarationException();
       }
 

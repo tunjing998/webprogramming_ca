@@ -1,0 +1,11 @@
+<?php return [
+
+  'env'      => 'development',
+
+  'database' => [
+    'name'     => 'Your Database Name Here',
+    'username' => 'Your Username Here',
+    'password' => 'Your Password Here'
+  ]
+
+] ?>

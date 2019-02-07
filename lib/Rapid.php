@@ -206,16 +206,16 @@
     public const DEFAULT_STATUS  = 200;
     public const DEFAULT_HEADERS = [];
 
-    private $router;
+    private $req;
     private $status;
     private $headers;
     private $finished;
 
-    public function __construct($router) {
+    public function __construct($req) {
       $this->status(Response::DEFAULT_STATUS);
       $this->headers  = Response::DEFAULT_HEADERS;
       $this->finished = FALSE;
-      $this->router   = $router;
+      $this->req     = $req;
     }
 
     /**
@@ -307,7 +307,7 @@
       if ($this->finished) {
         throw new RequestAlreadyFinishedException();
       }
-      $uri = rtrim($this->router->basePath(), '/') . '/' . ltrim($uri, '/');
+      $uri = rtrim($this->req->basePath(), '/') . '/' . ltrim($uri, '/');
       header("Location: $uri");
       exit();
     }
@@ -415,7 +415,7 @@
     public function dispatch() {
 
       $req        = new Request();
-      $res        = new Response($this);
+      $res        = new Response($req);
       $routes     = $this->routes[$req->method()] ?? [];
       $controller = NULL;
       $routeFound = FALSE;

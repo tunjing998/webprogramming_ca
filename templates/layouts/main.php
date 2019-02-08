@@ -6,6 +6,6 @@
   <title>Rapid Starter Project</title>
 </head>
 <body>
-  {{--VIEW--}}
+  <?= \Rapid\Renderer::VIEW_PLACEHOLDER ?>
 </body>
 </html>

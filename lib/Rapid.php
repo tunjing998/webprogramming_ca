@@ -83,8 +83,6 @@
 
     private $basePath;
     private $params;
-    private $query;
-    private $body;
     private $headers;
     private $remoteIp;
     private $method;
@@ -93,15 +91,11 @@
     public function __construct() {
       $this->basePath  = dirname($_SERVER['PHP_SELF']);
       $this->params    = NULL;
-      $this->query     = $_GET;
-      $this->body      = $_POST;
       $this->headers   = getallheaders();
-      $this->remoteIp  = $_SERVER['REMOTE_ADDR'];
-      $this->method    = $_SERVER['REQUEST_METHOD'];
       $this->url       = $this->getLocalPath();
     }
 
-    /**
+    /**`
      * Utility method to get the requested path, minus the base
      * path of the current script (relative to the document root).
      */
@@ -148,7 +142,7 @@
      * URL. (->query('foo') is an alias of $_GET['foo'])
      */
     public function query($name) {
-      return $this->query[$name] ?? NULL;
+      return $_GET[$name] ?? NULL;
     }
 
     /**
@@ -156,7 +150,7 @@
      * (->body('foo') is an alias of $_POST['foo'])
      */
     public function body($name) {
-      return $this->body[$name] ?? NULL;
+      return $_POST[$name] ?? NULL;
     }
 
     /**
@@ -170,7 +164,7 @@
      * Get the requesting user's IP address
      */
     public function remoteIp() {
-      return $this->remoteIp;
+      return $_SERVER['REMOTE_ADDR'];
     }
 
     /**
@@ -184,7 +178,7 @@
      * Get the request method (GET/POST/PUT, etc.)
      */
     public function method() {
-      return $this->method;
+      return $_SERVER['REQUEST_METHOD'];
     }
 
     /**

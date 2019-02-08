@@ -91,7 +91,7 @@
     public function __construct() {
       $this->basePath  = dirname($_SERVER['PHP_SELF']);
       $this->params    = NULL;
-      $this->headers   = getallheaders();
+      $this->headers   = NULL;
       $this->url       = $this->getLocalPath();
     }
 
@@ -157,6 +157,10 @@
      * Get a single, named request header
      */
     public function header($name) {
+      // 'Lazy' load headers on first call
+      if ($this->headers === NULL) {
+        $this->headers = getallheaders();
+      }
       return $this->headers[$name] ?? NULL;
     }
 

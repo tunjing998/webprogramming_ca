@@ -20,6 +20,7 @@ On this page:
 5. Create a repository for your project on GitLab, GitHub, or BitBucket
 6. Make the above repository the *remote* for your *local* repository (`git remote add origin ...`).
 7. Replace the contents of this README with headings for your own README content
+8. Edit the project `.htaccess` file to reflect the new location for the rewrite rule
 8. Make your first commit and push.
 9. **Remove any files which you don't need for your project** (the example controllers, etc).
 

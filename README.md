@@ -12,6 +12,7 @@ On this page:
 * [Base Path](#base-path)
 * [Reporting Bugs](#reporting-bugs)
 
+
 ## Getting Started
 1. Download this repository (note: download, don't clone).
 2. Extract, rename, and move such that the project is located at `/path/to/XAMPP/htdocs/wp_ca3_lastName_firstName/` (replacing names with your own);

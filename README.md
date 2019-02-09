@@ -40,7 +40,8 @@ To use the router, create a new Router instance in your index.php file, define t
   $app = new \Rapid\Router();
 
   // Define routes
-  $app->GET('/', 'Home');
+  $app->GET('/',      'Home');
+  $app->GET('/about', 'About');
 
   // Begin processing
   $app->dispatch();
@@ -49,6 +50,29 @@ To use the router, create a new Router instance in your index.php file, define t
 ```
 
 The current Router implementation only supports defining routes for `GET` and `POST` method requests.
+
+Note that route definitions are RegEx-based, so you can use any valid RegEx as part of a route definition:
+
+```php
+// Match /user/[any2numbers] e.g. /user/42
+$app->GET('/user/[0-9]{2}', 'Home');
+```
+
+The use of named capture groups is also supported. In the following example, the user ID (2 numbers in this example) is captured in a group named `id`:
+
+```php
+$app->GET('/user/(?<id>[0-9]{2})', 'Home');
+```
+
+Rapid provides access to named capture groups through the `param()` method of a Request object. E.g. from controller:
+```php
+<?php return function($req, $res) {
+
+  $id = intval($req->param('id'));
+
+} ?>
+```
+
 
 ## Working with Controllers
 Once you have set up a route definition (see: working with the router), you must add a controller for the route to the `controllers` directory. If, in your route definition, you named your controller `Home`, then the controller file should be called `Home.php`. Therefore you should create the file at `controllers/Home.php`.

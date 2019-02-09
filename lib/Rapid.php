@@ -104,9 +104,6 @@
       // Get requested path, minus a query string if there is one
       $localPath = explode('?', $_SERVER['REQUEST_URI'])[0];
 
-      // Get requested path, minus the fragment string if there is one
-      $localPath = explode('#', $localPath)[0];
-
       // Remove basePath from localPath
       // Snippet taken from https://stackoverflow.com/questions/4517067
       // ^^^ That's a reference

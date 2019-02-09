@@ -84,8 +84,6 @@
     private $basePath;
     private $params;
     private $headers;
-    private $remoteIp;
-    private $method;
     private $url;
 
     public function __construct() {

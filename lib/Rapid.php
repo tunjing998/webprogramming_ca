@@ -109,7 +109,7 @@
         $localPath = substr($localPath, strlen($this->basePath));
       }
 
-      return $localPath;
+      return '/' . ltrim($localPath, '/');
     }
 
     /**

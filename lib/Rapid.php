@@ -196,8 +196,8 @@
 
   class Response {
 
-    public const DEFAULT_STATUS  = 200;
-    public const DEFAULT_HEADERS = [];
+    const DEFAULT_STATUS  = 200;
+    const DEFAULT_HEADERS = [];
 
     private $req;
     private $status;
@@ -314,7 +314,7 @@
 
   class Renderer {
 
-    public const VIEW_PLACEHOLDER = '{{--VIEW--}}';
+    const VIEW_PLACEHOLDER = '{{--VIEW--}}';
 
     /**
      * Compile the parts of a template (layout and view) to their

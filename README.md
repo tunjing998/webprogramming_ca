@@ -4,7 +4,7 @@ This is the **Rapid** PHP MVC framework created for GD2/CO2a Web Development (20
 On this page:
 
 * [Getting Started](#getting-started)
-* [New in Version 0.2.0 (CA4)](#new-in-version-020-ca4)
+* [New in Version 0.2.0 (CA4)](#new-in-version-020-ca4-starter-code)
 * [Working with the Router](#working-with-the-router)
 * [Working with Controllers](#working-with-controllers)
   * [The `Request` Object](#the-request-object)
@@ -30,7 +30,7 @@ On this page:
 8. Make your first commit and push.
 9. **Remove any files which you don't need for your project** (the example controllers, etc).
 
-## New in Version 0.2.0 (CA4 Started Code)
+## New in Version 0.2.0 (CA4 Starter Code)
 * Adds [`\Rapid\ConfigFile::getContent()`](#config-file-helper) helper
 * Adds [`\Rapid\Database::getPDO()`](#database-pdo-helper) helper
 * Adds `json()` method to the [`Response Object`](#he-response-object)

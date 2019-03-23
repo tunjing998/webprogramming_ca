@@ -342,12 +342,12 @@
       $view   = NULL;
       $layout = NULL;
 
-      // Use object buffering to load the contents into a varibale
+      // Use object buffering to load the contents into a variable
       ob_start();
         $layoutIncluded = @include_once("templates/layouts/$layoutName.php");
         $layout         = ob_get_clean();
 
-      // Use object buffering to load the contents into a varibale
+      // Use object buffering to load the contents into a variable
       ob_start();
         $viewIncluded = @include_once("templates/views/$viewName.php");
         $view         = ob_get_clean();
@@ -434,7 +434,7 @@
           $matches        = NULL;
           $matched        = preg_match($normal_pattern, $req->url(), $matches);
 
-          // If found, rry to include the contoller
+          // If found, rry to include the controller
           if ($matched) {
             $routeFound = TRUE;
             $controller = @include_once("controllers/$controllerName.php");

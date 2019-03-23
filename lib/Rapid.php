@@ -74,6 +74,7 @@
   class ControllerNotFoundException     extends Exception {};
   class RouteNotFoundException          extends Exception {};
   class ConfigFileNotFoundException     extends Exception {};
+  class ConfigPDOKeysMissingException   extends Exception {};
 
 
   ##########################################################
@@ -493,6 +494,54 @@
 
       // Return a copy of content
       return ConfigFile::$content;
+    }
+
+  }
+
+
+  ##########################################################
+  # Database Helper
+  ##########################################################
+
+  class Database {
+
+    // Holds the cached PDO object
+    private static $pdo = NULL;
+
+    /**
+     * If a PDO object has already been created, this will
+     * return the cached object. Otherwise, it will create
+     * a new PDO object from the following values in the
+     * standard location config file:
+     *   - DATABASE_HOST
+     *   - DATABASE_NAME
+     *   - DATABASE_USER
+     *   - DATABASE_PASS
+     */
+    public static function getPDO() {
+
+      // Create PDO object, if not already created
+      if (Database::$pdo === NULL) {
+
+        // Load config file contents
+        $config = ConfigFile::getContent();
+
+        // Check all required config file values exist
+        $host = isset($config['DATABASE_HOST']) ? $config['DATABASE_HOST']: NULL;
+        $name = isset($config['DATABASE_NAME']) ? $config['DATABASE_NAME']: NULL;
+        $user = isset($config['DATABASE_USER']) ? $config['DATABASE_USER']: NULL;
+        $pass = isset($config['DATABASE_PASS']) ? $config['DATABASE_PASS']: NULL;
+
+        if ($host === NULL || $name === NULL || $user === NULL || $pass === NULL) {
+          throw new ConfigPDOKeysMissingException();
+        }
+
+        // Attempt connection (note: exceptions are allowed to throw onward)
+        Database::$pdo = new \PDO("mysql:host=$host;dbname=$name;charset=utf8mb4", $user, $pass);
+      }
+
+      // Return the PDO object
+      return Database::$pdo;
     }
 
   }

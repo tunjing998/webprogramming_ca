@@ -11,6 +11,7 @@ On this page:
 * [Example Controller Flow (Some Pseudo-code)](#example-controller-flow-some-pseudo-code)
 * [Exception Handling](#exception-handling)
 * [Config File Helper](#config-file-helper)
+* [Database PDO Helper](#database-pdo-helper)
 * [Base Path](#base-path)
 * [Reporting Bugs](#reporting-bugs)
 
@@ -29,6 +30,7 @@ On this page:
 
 ## New in Version 0.2.0 (CA4)
 * Adds [`\Rapid\ConfigFile::getContent()`](#config-file-helper) helper
+* Adds [`\Rapid\Database::getPDO()`](#database-pdo-helper) helper
 
 ## Working with the Router
 The router is the main control node in Rapid. It is the piece of code that is responsible for defining the routes your site will support; for mapping those routes to a controller; for inspecting the URL a user has requested; for checking if this URL matches one of your routes; for loading the controller for a given route; for calling the controller for a given route (i.e. for handing processing off to the controller).
@@ -289,6 +291,7 @@ Exception                         | Description
 `ControllerNotFoundException`     | Thrown when your code attempts to dispatch to a controller that could not be found or opened
 `RouteNotFoundException`          | Thrown when a user requests a route which has not been defined
 `ConfigFileNotFoundException`     | Thrown when a config file is not in the expected location, when using the Rapid config file helper
+`ConfigPDOKeysMissingException`   | Thrown when a config file contain needed database config values, when using the Rapid database pdo helper
 
 These Exception types can be used for **catch specialization**:
 
@@ -324,6 +327,32 @@ Using the helper in a controller:
 } ?>
 ```
 
+## Database PDO Helper
+Version 0.2.0 of this library includes a utility for generating a reusable PDO object for database interactions. For this to work, your config file must be located at: `[project root]/config.php` and contain the following keys:
+
+config.php:
+```php
+<?php return [
+
+  'DATABASE_HOST' => '127.0.0.1',
+  'DATABASE_USER' => 'me',
+  'DATABASE_PASS' => 'superSecret',
+  'DATABASE_NAME' => 'myDatabase'
+
+] ?>
+```
+
+using this helper, a reusable PDO object will created and returned on each subsequent use, so you can call the helper, as shown below, as many times as you need to without a performance penalty -- the first time you call it, The PDO object will be created. On subsequent calls, the object will be returned for Rapid's cache.
+
+Using the helper in a controller:
+
+```php
+<?php return function($req, $res) {
+
+  $pdo = \Rapid\Database::getPDO();
+
+} ?>
+```
 
 ## Base Path
 To make your code as portable as possible, Rapid calculates the difference between your server document root and your project's index.php file and defines this as a base path that you do not have to include in your route definitions or redirect calls. Take for example a scenario where your index.php is located at `htdocs/my_ca/`, here Rapid will calculate your base path as `/my_ca`, so your route definitions only need to continue on from this point (e.g. route `/somePath` is known to mean `/my_ca/somePath`).

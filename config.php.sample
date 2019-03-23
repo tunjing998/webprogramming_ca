@@ -1,11 +1,9 @@
 <?php return [
 
-  'env'      => 'development',
-
-  'database' => [
-    'name'     => 'Your Database Name Here',
-    'username' => 'Your Username Here',
-    'password' => 'Your Password Here'
-  ]
+  'ENV'           => 'development',
+  'DATABASE_HOST' => '127.0.0.1',
+  'DATABASE_USER' => 'root',
+  'DATABASE_PASS' => '',
+  'DATABASE_NAME' => 'wp_ca3_gavin_shane'
 
 ] ?>

@@ -19,16 +19,18 @@ On this page:
 
 
 ## Getting Started
-1. Download this repository (note: download, don't clone).
-2. Extract, rename, and move such that the project is located at `/path/to/XAMPP/htdocs/wp_ca3_lastName_firstName/` (replacing names with your own);
-3. Copy `config.php.sample` to `config.php` (note that this is gitignored -- it should **not** be included in your repository).
-4. Initialize the downloaded folder as a GIT repository (`git init`);
-5. Create a repository for your project on GitLab, GitHub, or BitBucket
-6. Make the above repository the *remote* for your *local* repository (`git remote add origin ...`).
-7. Replace the contents of this README with headings for your own README content
-8. Edit the project `.htaccess` file to reflect the new location for the rewrite rule
-8. Make your first commit and push.
-9. **Remove any files which you don't need for your project** (the example controllers, etc).
+1. One team member should **Fork** this repository using their online GIT repository hosting provider of choice, as discussed in class. This team member should then ensure all other team members have full access to the repository.
+2. Each team member should then **clone** the repository to their local machine to begin work
+3. Each team member (on their local machine) should copy `config.php.sample` to `config.php` (note that this is gitignored -- it should **not** be included in your repository).
+4. At this point, each team member should create a new **branch** for the first feature they will be working on.
+5. Each team member should remember to **push** their local branches to the remote (branch of the same name) as they would normally push if they were working on the master branch.
+6. Individual branches should be periodically **merge**d into master
+7. Whenever the previous action (6) occurs, each team member should **merge** the remote master branch into their local working branches.
+8. Initial actions for team members, after they have branched, should include:
+  * Replace the contents of this README with headings for your own README content
+  * Edit the project `.htaccess` file to reflect the new location for the rewrite rule
+  * **Remove any files which you don't need for your project** (the example controllers, etc).
+
 
 ## New in Version 0.2.0 (CA4 Starter Code)
 * Adds [`\Rapid\ConfigFile::getContent()`](#config-file-helper) helper

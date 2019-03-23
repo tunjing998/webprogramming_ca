@@ -29,7 +29,12 @@ On this page:
 8. Initial actions for team members, after they have branched, should include:
   * Replace the contents of this README with headings for your own README content
   * Edit the project `.htaccess` file to reflect the new location for the rewrite rule
-  * **Remove any files which you don't need for your project** (the example controllers, etc).
+  * **Remove any files which you don't need for your project** (the example controllers, etc.)
+
+Additional notes:
+
+* It would likely be helpful to add an SQL seed file to your repository
+* Any team member working on the master branch should be considered a mortal sin. The master branch should only be used to combine (merge) the work that has been done in other branches
 
 
 ## New in Version 0.2.0 (CA4 Starter Code)

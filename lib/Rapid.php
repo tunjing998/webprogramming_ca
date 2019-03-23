@@ -283,6 +283,16 @@
     }
 
     /**
+     * Utility wrapper for sending JSON content to the
+     * user. Wraps ->send(), but sets proper headers for
+     * JSON, and encodes the passed content as JSON
+     */
+    public function json($content) {
+      $this->header('Content-Type', 'application/json');
+      $this->send(json_encode($content));
+    }
+
+    /**
      * Compile the specified template, and send the content
      * to the user. Wraps the view compile stage, and a send
      */

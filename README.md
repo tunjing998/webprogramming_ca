@@ -128,6 +128,7 @@ Method                     | Description
 `end()`                    | Mark the response as finished. Any attempt to modify the response after this will throw an exception
 `send($content)`           | The status code will be set; all buffered headers will be set; the specified content (body) will be sent; the response will be marked finished
 `render(...)`              | See section on working with templates
+`json(...)`                | Use for rendering JSON content, instead of a template. This method sets appropriate headers (content type), and encodes the passed value as JSON
 `redirect($url)`           | Redirect the user to a different route. This will redirect the user, and kill the current script.
 
 

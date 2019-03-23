@@ -189,6 +189,49 @@
       return $this->basePath;
     }
 
+    /**
+     * Ensure sessions for the current request --
+     * restore an existing session, or create new
+     */
+    public function sessionStart() {
+      if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+      }
+    }
+
+    /**
+     * Get a single named session value
+     * (->session('foo') is an alias of $_SESSION['foo'])
+     * But ensures session has been started before
+     * retrieval
+     */
+    public function session($name) {
+      $this->sessionStart();
+      return $_SESSION[$name] ?? NULL;
+    }
+
+    /**
+     * Set a named session value
+     * (->sessionSet('foo', 'bar') is an alias of
+     * $_SESSION['foo'] = 'bar')
+     * But ensures session has been started before
+     * setting
+     */
+    public function sessionSet($name, $value) {
+      $this->sessionStart();
+      $_SESSION[$name] = $value;
+    }
+
+    /**
+     * Destroy all data associated with the current
+     * session (immediately invalidates all data)
+     */
+    public function sessionDestroy() {
+      $this->sessionStart();
+      session_destroy();
+      $_SESSION = [];
+    }
+
   }
 
 

@@ -1,14 +1,16 @@
 # Rapid PHP MVC Framework
-This is the **Rapid** PHP MVC framework created for GD2/CO2a Web Development (2018/19) CA3. This version has no in-built support or helpers for Models, so it is really just a VC framework at this point (you'll have to add model support yourself).
+This is the **Rapid** PHP MVC framework created for GD2/CO2a Web Development (2018/19) CA3 and CA4. This version has no in-built support or helpers for Models, so it is really just a VC framework at this point (you'll have to add model support yourself).
 
 On this page:
 
 * [Getting Started](#getting-started)
+* [New in Version 0.2.0 (CA4)](#new-in-version-020-ca4)
 * [Working with the Router](#working-with-the-router)
 * [Working with Controllers](#working-with-controllers)
 * [Working with Templates](#working-with-templates)
 * [Example Controller Flow (Some Pseudo-code)](#example-controller-flow-some-pseudo-code)
 * [Exception Handling](#exception-handling)
+* [Config File Helper](#config-file-helper)
 * [Base Path](#base-path)
 * [Reporting Bugs](#reporting-bugs)
 
@@ -24,6 +26,9 @@ On this page:
 8. Edit the project `.htaccess` file to reflect the new location for the rewrite rule
 8. Make your first commit and push.
 9. **Remove any files which you don't need for your project** (the example controllers, etc).
+
+## New in Version 0.2.0 (CA4)
+* Adds [`\Rapid\ConfigFile::getContent()`](#config-file-helper) helper
 
 ## Working with the Router
 The router is the main control node in Rapid. It is the piece of code that is responsible for defining the routes your site will support; for mapping those routes to a controller; for inspecting the URL a user has requested; for checking if this URL matches one of your routes; for loading the controller for a given route; for calling the controller for a given route (i.e. for handing processing off to the controller).
@@ -283,6 +288,7 @@ Exception                         | Description
 `RouteRedeclarationException`     | Thrown when your code attempts to redeclare a route that has already been declared
 `ControllerNotFoundException`     | Thrown when your code attempts to dispatch to a controller that could not be found or opened
 `RouteNotFoundException`          | Thrown when a user requests a route which has not been defined
+`ConfigFileNotFoundException`     | Thrown when a config file is not in the expected location, when using the Rapid config file helper
 
 These Exception types can be used for **catch specialization**:
 
@@ -299,6 +305,24 @@ Exception                         | Description
 ----------------------------------|---------------------
 `getRequestObject()`              | Get the Rapid Request object. `NULL` if an exception was thrown before dispatching
 `getResponseObject()`             | Get the Rapid Response object. `NULL` if an exception was thrown before dispatching
+
+
+## Config File Helper
+Version 0.2.0 of this library includes a utility for loading your config file contents. For this to work, your config file must be located at: `[project root]/config.php` (i.e. adjacent to index.php). If the config file cannot be loaded, a `\Rapid\ConfigFileNotFoundException` will be thrown.
+
+The loading of this file is cached, so you can call the content loader, as shown below, as many times as you need to without a performance penalty -- the first time you call it, the config file will be loaded and cached by rapid. On subsequent calls, the content will be returned for Rapid's cache.
+
+Using the helper in a controller:
+
+```php
+<?php return function($req, $res) {
+
+  $config = \Rapid\ConfigFile::getContent();
+
+  echo $config['someConfigFileValue'];
+
+} ?>
+```
 
 
 ## Base Path

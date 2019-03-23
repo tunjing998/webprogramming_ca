@@ -73,6 +73,7 @@
   class RouteRedeclarationException     extends Exception {};
   class ControllerNotFoundException     extends Exception {};
   class RouteNotFoundException          extends Exception {};
+  class ConfigFileNotFoundException     extends Exception {};
 
 
   ##########################################################
@@ -454,6 +455,44 @@
         // Then throw the exception onward
         throw $e;
       }
+    }
+
+  }
+
+
+  ##########################################################
+  # Configuration file Loader
+  ##########################################################
+
+  class ConfigFile {
+
+    // Holds the cached config file contents
+    private static $content = NULL;
+
+    /**
+     * If the config file has already been loaded, this will
+     * return the cached content. If not, it will first load
+     * the file, and then return the content. Throws if the
+     * config file could not be loaded
+     */
+    public static function getContent() {
+
+      // Load the config file, if not already done
+      if (ConfigFile::$content === NULL) {
+
+        $content = @include_once('config.php');
+
+        // File could not be loaded
+        if ($content === FALSE) {
+          throw new ConfigFileNotFoundException();
+        }
+
+        // Cache the content to prevent repeated loads
+        ConfigFile::$content = $content;
+      }
+
+      // Return a copy of content
+      return ConfigFile::$content;
     }
 
   }

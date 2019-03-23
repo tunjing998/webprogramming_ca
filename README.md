@@ -7,6 +7,8 @@ On this page:
 * [New in Version 0.2.0 (CA4)](#new-in-version-020-ca4)
 * [Working with the Router](#working-with-the-router)
 * [Working with Controllers](#working-with-controllers)
+  * [The `Request` Object](#the-request-object)
+  * [The `Response` Object](#the-response-object)
 * [Working with Templates](#working-with-templates)
 * [Example Controller Flow (Some Pseudo-code)](#example-controller-flow-some-pseudo-code)
 * [Exception Handling](#exception-handling)
@@ -28,9 +30,14 @@ On this page:
 8. Make your first commit and push.
 9. **Remove any files which you don't need for your project** (the example controllers, etc).
 
-## New in Version 0.2.0 (CA4)
+## New in Version 0.2.0 (CA4 Started Code)
 * Adds [`\Rapid\ConfigFile::getContent()`](#config-file-helper) helper
 * Adds [`\Rapid\Database::getPDO()`](#database-pdo-helper) helper
+* Adds `json()` method to the [`Response Object`](#he-response-object)
+* Adds `sessionStart()` method to the [`Request Object`](#he-request-object)
+* Adds `sessionDestroy()` method to the [`Request Object`](#he-request-object)
+* Adds `session()` method to the [`Request Object`](#he-request-object)
+* Adds `sessionSet()` method to the [`Request Object`](#he-request-object)
 
 ## Working with the Router
 The router is the main control node in Rapid. It is the piece of code that is responsible for defining the routes your site will support; for mapping those routes to a controller; for inspecting the URL a user has requested; for checking if this URL matches one of your routes; for loading the controller for a given route; for calling the controller for a given route (i.e. for handing processing off to the controller).
@@ -116,6 +123,10 @@ Method                     | Description
 `url()`                    | Get the URL the user has requested, minus the project base path
 `method()`                 | Get the method used for the request (e.g. `GET` or `POST`)
 `basePath()`               | Returns the difference between your server's Document Root and your project's index.php file (see dedicated section)
+`sessionStart()`           | Ensure sessions for the current request; this will restore an existing session, or create new one if needed
+`sessionDestroy()`         | Destroys all data associated with a current session
+`session($name)`           | Get a single, named session ($_SESSION) value, or `NULL` if the value does not exist (Note: does not exist !== is empty). Ensures the session has been started before attempting retrieval.
+`sessionSet($name, $value)`| Set a single, named session ($_SESSION) value. Ensures the session has been started before attempting to set.
 
 ### The `Response` Object
 Provides methods for formulating a response to a user's request:
@@ -126,10 +137,10 @@ Method                     | Description
 `status($status)`          | Set the response status code (e.g. `200`)
 `header($key,$value)`      | Set a single, named header for the response. E.g. `header('Content-Type', 'text/html')`
 `end()`                    | Mark the response as finished. Any attempt to modify the response after this will throw an exception
-`send($content)`           | The status code will be set; all buffered headers will be set; the specified content (body) will be sent; the response will be marked finished
+`send($content)`           | The status code will be set; all buffered headers will be set; the specified content (body) will be sent; the response will be marked finished. Send is publicly visible in case it may be needed, but as a general rule should not be used: favour the use of `render` or `json` instead.
 `render(...)`              | See section on working with templates
-`json(...)`                | Use for rendering JSON content, instead of a template. This method sets appropriate headers (content type), and encodes the passed value as JSON
-`redirect($url)`           | Redirect the user to a different route. This will redirect the user, and kill the current script.
+`json($content)`           | Use for rendering JSON content, instead of a template. This method sets appropriate headers (content type), and encodes the passed value as JSON
+`redirect($url)`           | Redirect the user to a different route. This will redirect the user, and kill the current script. This method is base path aware.
 
 
 ## Working with Templates

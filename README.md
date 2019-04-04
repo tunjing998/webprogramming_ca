@@ -1,1 +1,1 @@
-Edited in HTACCESS branch
+Edited in README branch

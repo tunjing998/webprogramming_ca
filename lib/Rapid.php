@@ -85,16 +85,29 @@
 
     private $basePath;
     private $params;
+    private $jsonBodyData;
     private $headers;
     private $url;
 
     public function __construct() {
-      $this->basePath  = dirname($_SERVER['PHP_SELF']);
-      $this->params    = NULL;
-      $this->headers   = NULL;
-      $this->url       = $this->getLocalPath();
+      $this->basePath     = dirname($_SERVER['PHP_SELF']);
+      $this->params       = NULL;
+      $this->jsonBodyData = $this->parseJsonBodyData();
+      $this->headers      = NULL;
+      $this->url          = $this->getLocalPath();
     }
 
+    private function parseJsonBodyData()
+    {
+      $jsonData = file_get_contents('php://input');
+      $jsonData = json_decode($jsonData,TRUE);
+      return $jsonData;
+    }
+
+    public function jsonBodyData()
+    {
+      return $this->jsonBodyData;
+    }
     /**`
      * Utility method to get the requested path, minus the base
      * path of the current script (relative to the document root).
@@ -316,8 +329,8 @@
 
       http_response_code($this->status);
 
-      foreach($this->headers as $header=>$content) {
-        header("$header: $content");
+      foreach($this->headers as $header=>$value) {
+        header("$header: $value");
       }
 
       echo $content;

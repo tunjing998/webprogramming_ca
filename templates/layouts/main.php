@@ -145,7 +145,12 @@
                 </div>
                
 
-
+                <script src="/api/jq/BootstrapCaidan/js/metismenu.js"></script>
+<script>
+    $(function () {
+        $('#menu').metisMenu();
+    });
+</script>
 
   <?= \Rapid\Renderer::VIEW_PLACEHOLDER ?>
 

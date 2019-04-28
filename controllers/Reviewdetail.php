@@ -1,5 +1,4 @@
 <?php return function($req, $res) {
-require_once 'models/Product.php';
 if(1==($req->session('id')))
 {
     $layout = 'admin';
@@ -11,11 +10,12 @@ else
 {
   $layout = 'main';
 }
-$products = Product::findTenByRand();
+require_once 'models/Review.php';
 
-$res->render($layout, 'home', [
-  'page_title' => 'Home Page','products'=>$products
+$review = Review::findOneById(intval($req->param('id')));
+
+$res->render($layout, 'reviewdetail', [
+  'page_title' => 'Review Details','review'=>$review
 ]);
-
 }
 ?>

@@ -1,0 +1,127 @@
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Add Zoom Animation */
+.animate {
+  animation: animatezoom 0.6s;
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.container-login {
+  padding: 25px;
+  background: #fff;
+  border-radius: 10px;
+}
+h1 {
+  text-align: center;
+  border: 10px;
+  font-size: 28px;
+  padding-left: 5px;
+}
+p {
+  font-size: 18px;
+  text-align: center;
+}
+.login input {
+  height: 45px;
+  width: 82%;
+  padding: 0 25px;
+  border-style: groove;
+  padding-top: 5px;
+}
+
+#btn {
+  background-color: #4272d7;
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  margin-top: 4em;
+  color: #fff;
+  text-decoration: none;
+}
+#showpassword {
+  padding-top: 0.75em;
+  right:25%;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+  position: absolute;
+}
+#password {
+  position: absolute;
+}
+button:visited {
+  color: #fff;
+}
+button:hover {
+  cursor: pointer;
+}
+.container-1 {
+  height: 1px;
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  padding-top: 2.5em;
+}
+p a {
+  text-decoration: none;
+  color: #7b7b7b;
+}
+p a:visited {
+  color: #7b7b7b;
+}
+p a:hover {
+  color: #efdd8d;
+}
+input[type="submit"] {
+  font-family: "Righteous", cursive;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#check {
+  font-size: 5px;
+}
+
+#psw,
+#username {
+  padding-top: 15px;
+}
+
+button {
+  padding-top: 50px;
+}
+
+#show {
+  padding-top: 10px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+}

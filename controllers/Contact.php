@@ -1,9 +1,14 @@
 <?php return function($req, $res) {
-include_once('models/contact.php');
-$db = require('lib/database.php');
-$data = Manager::readAll($db);
-$res->render('main', 'contact', [
-    'pageTitle' => 'contact Page!','record'=>$data
-]);
 
-} ?>
+if(null!=($req->session('id')))
+{
+    $layout = 'login';
+}else
+{
+    $layout = 'main';
+}
+$res->render($layout, 'contact', [
+  'someLocalKey' => 'Some Local Value'
+]);
+}
+?>

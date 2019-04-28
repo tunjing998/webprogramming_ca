@@ -1,7 +1,10 @@
+<?php require_once('Model.php') ?>
 <?php
+use Rapid\Database;
 
 class Review
 {
+    private $reviewId;
     private $productId;
     private $clientId;
     private $reviewTitle;
@@ -15,6 +18,7 @@ class Review
         if (!is_array($args)) {
             throw new Exception('Order constructor requires an array');
         }
+        $this->setReviewId($args['review_id'] ?? NULL);
         $this->setProductId($args['product_id']         ?? NULL);
         $this->setClientId($args['client_id']       ?? NULL);
         $this->setReviewTitle($args['review_title'] ?? NULL);
@@ -23,6 +27,10 @@ class Review
         $this->setLastModified($args['last_modified'] ?? NULL);
     }
 
+    public function getReviewId()
+    {
+        return $this->reviewId;
+    }
     public function getProductId()
     {
         return $this->productId;
@@ -52,6 +60,22 @@ class Review
     {
         return $this->lastModified;
     }
+    public function setReviewId($id)
+    {
+        if ($id === NULL) {
+            $this->review_id = NULL;
+            return;
+        }
+
+        $id = (int)$id;
+
+        if (!Model::isValidId($id)) {
+            throw new Exception('ID for setId must be positive numeric or NULL');
+        }
+
+        $this->review_id = $id;
+    }
+
     public function setProductId($id)
     {
         if ($id === NULL) {
@@ -65,7 +89,7 @@ class Review
             throw new Exception('ID for setId must be positive numeric or NULL');
         }
 
-        $this->product = $id;
+        $this->product_id = $id;
     }
 
     public function setClientId($id)
@@ -123,15 +147,15 @@ class Review
             throw new Exception('Cannot delete a transient Review object');
         }
 
-        $stt = $pdo->prepare('DELETE FROM reviews WHERE product_id = :product_id AND client_id=:client_id');
+        $stt = $pdo->prepare('DELETE FROM reviews WHERE review_id = :id');
         $stt->execute([
-            'product_id' => $this->getProductId(),
-            'client_id' => $this->getClientId()
+            'id' => $this->getReviewId()
         ]);
 
         $deleted = $stt->rowCount() === 1;
 
         if ($deleted) {
+            $this->setReviewId(NULL);
             $this->setProductId(NULL);
             $this->setClientId(NULL);
         }
@@ -143,7 +167,7 @@ class Review
         $pdo = Database::getPDO();
 
 
-        if ($this->getId() === NULL) {
+        if ($this->getReviewId() === NULL) {
 
             $stt = $pdo->prepare('INSERT INTO reviews (product_id,client_id,review_title,review_text,suggest,last_modified) VALUES (:product_id,:client_id,:review_title,:review_text,:suggest,:last_modified)');
             $stt->execute([
@@ -160,24 +184,23 @@ class Review
             return $saved;
         } else {
 
-            $stt = $pdo->prepare('UPDATE products SET review_title=:review_title,review_text=:review_text,suggest=:suggest,last_modified=:last_modified WHERE product_id = :product_id AND client_id = :client_id');
+            $stt = $pdo->prepare('UPDATE products SET review_title=:review_title,review_text=:review_text,suggest=:suggest,last_modified=:last_modified WHERE review_id = :id');
             $stt->execute([
                 'review_title' => $this->getReviewTitle(),
                 'review_text' => $this->getReviewText(),
                 'suggest' => $this->getSuggest(),
                 'last_modified' => $this->getLastModified(),
-                'product_id' => $this->getProductId(),
-                'client_id' => $this->getClientId()
+                'id' => $this->getReviewId()
             ]);
 
             return $stt->rowCount() === 1;
         }
     }
 
-    public function findAll()
+    public static function findAll()
     {
         $pdo = Database::getPDO();
-        $query = $pdo->prepare('SELECT product_id,client_id,review_title,review_text,suggest,last_modified FROM reviews');
+        $query = $pdo->prepare('SELECT review_id,roduct_id,client_id,review_title,review_text,suggest,last_modified FROM reviews');
         $query->execute();
 
         return array_map(function ($row) {
@@ -185,7 +208,7 @@ class Review
         }, $query->fetchAll());
     }
 
-    public function findByClientId($id)
+    public static function findByClientId($id)
     {
         $pdo = Database::getPDO();
         $id = (int)$id;
@@ -193,7 +216,7 @@ class Review
         if (!Model::isValidId($id)) {
             throw new Exception('ID for findOneById must be positive numeric');
         }
-        $query = $pdo->prepare('SELECT product_id,client_id,review_title,review_text,suggest,last_modified FROM reviews WHERE client_id = :id');
+        $query = $pdo->prepare('SELECT review_id,product_id,client_id,review_title,review_text,suggest,last_modified FROM reviews WHERE client_id = :id');
         $query->execute([
             'id' => $id
         ]);
@@ -203,7 +226,26 @@ class Review
         }, $query->fetchAll());
     }
 
-    public function findOneById($id, $client_id)
+    public static function findByProductId($id, $limit = 3)
+    {
+        $pdo = Database::getPDO();
+        $id = (int)$id;
+
+        if (!Model::isValidId($id)) {
+            throw new Exception('ID for findOneById must be positive numeric');
+        }
+        $query = $pdo->prepare('SELECT review_id,product_id,client_id,review_title,review_text,suggest,last_modified FROM reviews WHERE product_id = :id LIMIT :limit');
+        $query->execute([
+            'id' => $id,
+            'limit' => $limit
+        ]);
+
+        return array_map(function ($row) {
+            return new Review($row);
+        }, $query->fetchAll());
+    }
+
+    public static function findOneById($id)
     {
         $pdo = Database::getPDO();
         $id = (int)$id;
@@ -215,10 +257,9 @@ class Review
             throw new Exception('ID for findOneById must be positive numeric');
         }
 
-        $query = $pdo->prepare('SELECT product_id,client_id,review_title,review_text,suggest,last_modified FROM reviews WHERE product_id = :id AND client_id=:client_id LIMIT 1');
+        $query = $pdo->prepare('SELECT review_id,product_id,client_id,review_title,review_text,suggest,last_modified FROM reviews WHERE WHERE review_id = :id LIMIT 1');
         $query->execute([
-            'id' => $id,
-            'client_id' => $client_id
+            'id' => $id
         ]);
 
         $row = $query->fetch();

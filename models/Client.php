@@ -1,6 +1,6 @@
+<?php require_once('Model.php') ?>
 <?php
 use Rapid\Database;
-
 class Client
 {
     private $client_id;
@@ -91,7 +91,7 @@ class Client
         $pdo = Database::getPDO();
 
 
-        if ($this->getId() === NULL) {
+        if ($this->getClientId() === NULL) {
 
             $stt = $pdo->prepare('INSERT INTO clients (nickname) VALUES (:name)');
             $stt->execute([

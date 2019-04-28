@@ -1,4 +1,7 @@
+<?php require_once('Model.php') ?>
 <?php
+use Rapid\Database;
+
 class Order
 {
     private $order_id;
@@ -115,7 +118,7 @@ class Order
         $pdo = Database::getPDO();
 
 
-        if ($this->getId() === NULL) {
+        if ($this->getOrderId() === NULL) {
 
             $stt = $pdo->prepare('INSERT INTO orders (client_id,order_status) VALUES (:client_id,:order_status)');
             $stt->execute([
@@ -144,7 +147,7 @@ class Order
         }
     }
 
-    public function findAll()
+    public static function findAll()
     {
         $pdo = Database::getPDO();
         $query = $pdo->prepare('SELECT order_id, client_id, order_status,order_date FROM orders');
@@ -155,7 +158,7 @@ class Order
         }, $query->fetchAll());
     }
 
-    public function findByClientId($id)
+    public static function findByClientId($id)
     {
         $pdo = Database::getPDO();
         $id = (int)$id;
@@ -173,7 +176,7 @@ class Order
         }, $query->fetchAll());
     }
 
-    public function findOneById($id)
+    public static function findOneById($id)
     {
         $pdo = Database::getPDO();
         $id = (int)$id;
@@ -192,5 +195,26 @@ class Order
         return $row !== FALSE
             ? new Order($row)
             : NULL;
+    }
+
+    public static function findOrderDetailById($id)
+    {
+        $pdo = Database::getPDO();
+        $id = (int)$id;
+
+        if (!Model::isValidId($id)) {
+            throw new Exception('ID for findOrderDetailById must be positive numeric');
+        }
+        $query = $pdo->prepare('SELECT orders_products.order_id AS order_id ,products.product_id AS product_id,
+        product_name,product_price,quantity,order_date 
+        FROM orders,orders_products,products 
+        WHERE orders_products.order_id = :id 
+        AND orders_products.order_id=orders.order_id 
+        AND orders_products.product_id = products.product_id');
+        $query->execute([
+            'id' => $id
+        ]);
+
+        return $query->fetchAll();
     }
 }

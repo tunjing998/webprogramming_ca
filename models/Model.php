@@ -7,10 +7,10 @@
   }
   public static function isValidPasscode($passcode)
   {
-    $uppercase = preg_match('@[A-Z]@', $passcode['value']);
-    $lowercase = preg_match('@[a-z]@', $passcode['value']);
-    $number    = preg_match('@[0-9]@', $passcode['value']);
-    $length    = strlen($passcode)<=8;
+    $uppercase = preg_match('@[A-Z]@', $passcode);
+    $lowercase = preg_match('@[a-z]@', $passcode);
+    $number    = preg_match('@[0-9]@', $passcode);
+    $length    = strlen($passcode) >= 8;
     return $uppercase && $lowercase && $number && $length;
   }
   public static function isValidEmail($email)
@@ -19,5 +19,4 @@
     $is_valid = filter_var($email, FILTER_VALIDATE_EMAIL);
     return $is_valid;
   }
-  
 }

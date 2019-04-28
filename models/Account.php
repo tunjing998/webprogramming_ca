@@ -1,4 +1,6 @@
+<?php require_once('Model.php') ?>
 <?php
+
 use Rapid\Database;
 
 class Account
@@ -136,7 +138,7 @@ class Account
 
             $stt = $pdo->prepare('INSERT INTO accounts (username,email,hash) VALUES (:name,:email,:hash)');
             $stt->execute([
-                'name' => $this->getName(),
+                'name' => $this->getUserName(),
                 'email' => $this->getEmail(),
                 'hash' => $hash
             ]);
@@ -154,7 +156,7 @@ class Account
                 'name' => $this->getUsername(),
                 'email' => $this->getEmail(),
                 'hash' => $hash,
-                'account_id'   => $this->getId()
+                'account_id' => $this->getId()
             ]);
             return $stt->rowCount() === 1;
         }
@@ -167,8 +169,12 @@ class Account
      */
     public static function login($input, $passcode)
     {
+        
         if (Model::isValidEmail($input)) {
             $inputType = 'email';
+        }else
+        {
+            $inputType='username';
         }
         $pdo = Database::getPDO();
         $query = $pdo->prepare("SELECT hash FROM accounts WHERE :input=:value");
@@ -178,5 +184,38 @@ class Account
         ]);
         $row = $query->fetch();
         return password_verify($passcode, $row['hash']);
+    }
+
+    public static function findOneById($id)
+    {
+        $pdo = Database::getPDO();
+        $id = (int)$id;
+
+        if (!Model::isValidId($id)) {
+            throw new Exception('ID for findOneById must be positive numeric');
+        }
+
+        $query = $pdo->prepare('SELECT account_id, username, email FROM accounts WHERE account_id = :id LIMIT 1');
+        $query->execute([
+            'id' => $id
+        ]);
+
+        $row = $query->fetch();
+
+        return $row !== FALSE
+            ? new Account($row)
+            : NULL;
+    }
+
+    public static function checkNameAvailable($username)
+    {
+        $pdo = Database::getPDO();
+
+        $query = $pdo->prepare('SELECT account_id, username, email FROM accounts WHERE username = :username LIMIT 1');
+        $query->execute([
+            'username' => $username
+        ]);
+        $available = $query->rowCount();
+        return $available;
     }
 }

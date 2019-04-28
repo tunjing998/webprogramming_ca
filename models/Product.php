@@ -1,4 +1,6 @@
+<?php require_once('Model.php') ?>
 <?php
+use Rapid\Database;
 
 class Product
 {
@@ -6,17 +8,19 @@ class Product
     private $productName;
     private $productType;
     private $productDetail;
+    private $productPrice;
     private $productImageAddr;
     public function __construct($args)
     {
 
         if (!is_array($args)) {
-            throw new Exception('Order constructor requires an array');
+            throw new Exception('Product constructor requires an array');
         }
-        $this->setProductId($args['product_id']         ?? NULL);
-        $this->setProductName($args['product_name']       ?? NULL);
-        $this->setProductType($args['product_type'] ?? NULL);
-        $this->setProductDetail($args['product_details']     ?? NULL);
+        $this->setProductId($args['product_id']                 ?? NULL);
+        $this->setProductName($args['product_name']             ?? NULL);
+        $this->setProductType($args['product_type']             ?? NULL);
+        $this->setProductDetail($args['product_details']        ?? NULL);
+        $this->setProductPrice($args['product_price']           ?? NULL);
         $this->setProductImageAddr($args['product_img_address'] ?? NULL);
     }
 
@@ -40,6 +44,10 @@ class Product
         return $this->productDetail;
     }
 
+    public function getProductPrice()
+    {
+        return $this->productPrice;
+    }
     public function getProductImageAddr()
     {
         return $this->productImageAddr;
@@ -57,8 +65,7 @@ class Product
         if (!Model::isValidId($id)) {
             throw new Exception('ID for setId must be positive numeric or NULL');
         }
-
-        $this->product = $id;
+        $this->productId = $id;
     }
 
     public function setProductName($name)
@@ -91,6 +98,19 @@ class Product
         $this->productDetail = $detail;
     }
 
+    public function setProductPrice($price)
+    {
+        if ($price === NULL) {
+            $this->productPrice = NULL;
+            return;
+        }
+        $price = (double)$price;
+
+        if (!Model::isValidId($price)) {
+            throw new Exception('Price for setPrice must be positive numeric');
+        }
+        $this->productPrice = $price;
+    }
     public function setProductImageAddr($addr)
     {
         if ($addr === NULL) {
@@ -125,14 +145,14 @@ class Product
     {
         $pdo = Database::getPDO();
 
+        if ($this->getProductId() === NULL) {
 
-        if ($this->getId() === NULL) {
-
-            $stt = $pdo->prepare('INSERT INTO products (product_name,product_type,product_details,product_img_address) VALUES (:product_name,:product_type,:product_details,:product_img_address)');
+            $stt = $pdo->prepare('INSERT INTO products (product_name,product_type,product_details,product_price,product_img_address) VALUES (:product_name,:product_type,:product_details,:product_price,:product_img_address)');
             $stt->execute([
                 'product_name' => $this->getProductName(),
                 'product_type' => $this->getProductType(),
                 'product_details' => $this->getProductDetail(),
+                'product_price' => $this->getProductPrice(),
                 'product_img_address' => $this->getProductImageAddr()
             ]);
 
@@ -146,11 +166,12 @@ class Product
             return $saved;
         } else {
 
-            $stt = $pdo->prepare('UPDATE products SET product_name=:product_name,product_type=:product_type,product_details=:product_details,product_img_address=:product_img_address WHERE product_id = :product_id');
+            $stt = $pdo->prepare('UPDATE products SET product_name=:product_name,product_type=:product_type,product_details=:product_details,product_price=:product_price,product_img_address=:product_img_address WHERE product_id = :product_id');
             $stt->execute([
                 'product_name' => $this->getProductName(),
                 'product_type' => $this->getProductType(),
                 'product_details' => $this->getProductDetail(),
+                'product_price' => $this->getProductPrice(),
                 'product_img_address' => $this->getProductImageAddr(),
                 'product_id'   => $this->getProductId()
             ]);
@@ -159,18 +180,36 @@ class Product
         }
     }
 
-    public function findAll()
+    public static function findAll()
     {
         $pdo = Database::getPDO();
-        $query = $pdo->prepare('SELECT product_id,product_name,product_type,product_details,product_img_address FROM products');
+        $query = $pdo->prepare('SELECT product_id,product_name,product_type,product_details,product_price,product_img_address FROM products');
         $query->execute();
 
         return array_map(function ($row) {
             return new Product($row);
         }, $query->fetchAll());
     }
+    public static function find25()
+    {
+        $pdo = Database::getPDO();
+        $query = $pdo->prepare('SELECT product_id,product_name,product_type,product_details,product_price,product_img_address FROM products LIMIT 25');
+        $query->execute();
+        return array_map(function ($row) {
+            return new Product($row);
+        }, $query->fetchAll());
+    }
+    public static function findTenByRand()
+    {
+        $pdo = Database::getPDO();
+        $query = $pdo->prepare('SELECT product_id,product_name,product_type,product_details,product_price,product_img_address FROM products ORDER BY RAND() LIMIT 8');
+        $query->execute();
 
-    public function findOneById($id)
+        return array_map(function ($row) {
+            return new Product($row);
+        }, $query->fetchAll());
+    }
+    public static function findOneById($id)
     {
         $pdo = Database::getPDO();
         $id = (int)$id;
@@ -179,7 +218,7 @@ class Product
             throw new Exception('ID for findOneById must be positive numeric');
         }
 
-        $query = $pdo->prepare('SELECT product_id,product_name,product_type,product_details,product_img_address FROM products WHERE product_id = :id LIMIT 1');
+        $query = $pdo->prepare('SELECT product_id,product_name,product_type,product_details,product_price,product_img_address FROM products WHERE product_id = :id LIMIT 1');
         $query->execute([
             'id' => $id
         ]);
@@ -191,14 +230,26 @@ class Product
             : NULL;
     }
 
-    public function findByType($type)
+    public static function findByType($type)
     {
         $pdo = Database::getPDO();
-        $query = $pdo->prepare('SELECT product_id,product_name,product_type,product_details,product_img_address FROM products WHERE product_type = :type');
+        $query = $pdo->prepare('SELECT product_id,product_name,product_type,product_details,product_price,product_img_address FROM products WHERE product_type = :type');
         $query->execute([
             'type' => $type
         ]);
 
+        return array_map(function ($row) {
+            return new Product($row);
+        }, $query->fetchAll());
+    }
+
+    public static function findByName($name)
+    {
+        $pdo = Database::getPDO();
+        $query = $pdo->prepare('SELECT product_id, product_name, product_type, product_details,product_price,product_img_address FROM products WHERE product_name LIKE :name ');
+        $query->execute([
+            'name' => "%" . $name . "%",
+        ]);
         return array_map(function ($row) {
             return new Product($row);
         }, $query->fetchAll());

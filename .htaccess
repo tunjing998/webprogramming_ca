@@ -8,3 +8,6 @@ RewriteRule (.*) index.php [QSA,L]
 
 # Directory indexing in assets is still possible, turn it off
 Options -Indexes
+php_flag file_uploads On
+php_value upload_max_filesize 8M
+php_value post_max_size 9M

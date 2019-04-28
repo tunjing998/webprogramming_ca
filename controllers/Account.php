@@ -1,9 +1,15 @@
 <?php return function($req, $res) {
-include_once('models/account.php');
-$db = require('lib/database.php');
-$data = Manager::readAll($db);
-$res->render('main', 'account', [
-    'pageTitle' => 'account Page!','record'=>$data
-]);
 
-} ?>
+if(null==($req->session('id')))
+{
+    $res->redirect('/');
+}
+require_once 'models/Account.php';
+require_once 'models/Client.php';
+$account = Account::findOneById($req->session('id'));
+$client  = Client::findOneById($req->session('id'));
+$res->render('login', 'account', [
+  'page_title' => 'My Account','account'=>$account,'client'=>$client
+]);
+}
+?>

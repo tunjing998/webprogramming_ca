@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container text-center">
     <h3>Product Details</h3>
-    <p><?= $locals['product']->getProductId() ?></p>
-    <p><?= $locals['product']->getProductName() ?></p>
-    <p><?= $locals['product']->getProductType() ?></p>
-    <p><?= $locals['product']->getProductDetail() ?></p>
-    <p><?= $locals['product']->getProductPrice() ?></p>
+    <p class="mb-1"><?= $locals['product']->getProductId() ?></p>
+    <p class="mb-1"><?= $locals['product']->getProductName() ?></p>
+    <p class="mb-1"><?= $locals['product']->getProductType() ?></p>
+    <p class="mb-1"><?= $locals['product']->getProductDetail() ?></p>
+    <p class="mb-1"><?= $locals['product']->getProductPrice() ?></p>
     <img src="<?= IMG_DIR . $locals['product']->getProductImageAddr() ?>" height="360px" width="360px">
 
     <h4>Other Reviews</h4>

@@ -18,15 +18,18 @@
     <link rel="stylesheet" type="text/css" href="<?= BASE_DIR ?>/assets/styles/main.css">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya|Chivo" rel="stylesheet">
 
 </head>
 
 <body>
     <header>
-        <h1>Rainbow & Unicorn</h1>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="<?= BASE_DIR ?>">Rainbow & Unicorn</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= BASE_DIR ?>/productadmin">Product</a>
                     </li>
@@ -44,7 +47,7 @@
                     </li>
                 </ul>
             </div>
-            
+
         </nav>
 
     </header>

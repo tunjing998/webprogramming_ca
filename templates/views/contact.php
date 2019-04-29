@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container m-2">
 	<address>
 		<strong>Some Company, Inc.</strong><br>
 		007 street<br>

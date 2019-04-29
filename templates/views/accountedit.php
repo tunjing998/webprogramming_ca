@@ -1,16 +1,8 @@
 <div class="container">
-    <h3>Account Details</h3>
-
-    
-    <p>UserName:<?= $locals['account']->getUsername() ?></p><br>
-    
-    <p>Email:<?= $locals['account']->getEmail() ?></p><br>
-    <form action='<?= BASE_DIR ?>/accountedit/<?= $locals['account']->getId() ?>' method='post'>
-        <input type='hidden' value=<?= $locals['account']->getId() ?>>
-        <label for="nickname">Account Nickname:</label>
-        <input value=<?= $locals['client']->getNickname() ?>><br>
-        <p>RegisterDate:<?= $locals['client']->getRegisterdate() ?></p><br>
-        <input type="submit" value='Submit'>
-    </form>
-    <a href="#">Reset Password</a>
+    <h3 class="text-center">Account Details</h3>
+    <p hidden><?= $locals['account']->getId() ?></p>
+    <p class="row mb-1 text-left d-flex justify-content-center"><span class="col-2">Username :</span><span class="col-3"><?= $locals['account']->getUsername() ?></span></p>
+    <p class="row mb-1 text-left d-flex justify-content-center"><span class="col-2">Email : </span><span class="col-3"><?= $locals['account']->getEmail() ?></span></p>
+    <p class="row mb-1 text-left d-flex justify-content-center"><span class="col-2">Nickname : </span><span class="col-3"><?= $locals['client']->getNickname() ?></span></p>
+    <p class="row mb-1 text-left d-flex justify-content-center"><span class="col-2">Register Date : </span><span class="col-3"><?= $locals['client']->getRegisterdate() ?></span></p>
 </div>

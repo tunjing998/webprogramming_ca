@@ -1,10 +1,14 @@
 $(document).ready(function () {
 
-    $('#type1,#type2,#type3').on('click', function () {
+    $('#type1,#type2,#type3,#type4,#priceInputMax,#priceInputMin').on('click', function () {
         var type = $(this).html();
+        console.log(type);
+        if (type == 'All') {
+            type = '';
+        }
         var priceLow = $('#priceMin').html();
         var priceHigh = $('#priceMax').html();
-        console.log(type);
+
         $.ajax(
             {
                 url: '/wp_ca4_tunjingAng_xingnuoCen_emiliaCzubaj/assets/api/productFilter.php',
@@ -21,11 +25,13 @@ $(document).ready(function () {
                     if (result.length != 0) {
                         result.forEach(element => {
                             body.append(`
-                                <div class='container col-6'>
-                <img src="/wp_ca4_tunjingAng_xingnuoCen_emiliaCzubaj/assets/img/productImg/${element.product_img_address}" height="360px" width="360px">
-                <p>${element.product_name}</p>
-                <p>${element.product_price}</p>
-            </div>
+                <div class="col-3 m-3 shadow bg-black border rounded product-item">
+                        <img src="/wp_ca4_tunjingAng_xingnuoCen_emiliaCzubaj/assets/img/productImg/${element.product_img_address}" width="250px" height="250px">
+                        <p><?= ${element.product_name} ?></p>
+                        <p><?= ${element.product_price} ?></p>
+                        <a href='/wp_ca4_tunjingAng_xingnuoCen_emiliaCzubaj/product/${element.product_id}'>More Details </a>
+                    </div>
+               
                      `);
                         });
                     } else {

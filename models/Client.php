@@ -108,10 +108,10 @@ class Client
             return $saved;
         } else {
 
-            $stt = $pdo->prepare('UPDATE students SET nickname = :name WHERE client_id = :client_id');
+            $stt = $pdo->prepare('UPDATE clients SET nickname = :name WHERE client_id = :client_id');
             $stt->execute([
                 'name' => $this->getNickname(),
-                'client_id'   => $this->getId()
+                'client_id'   => $this->getClientId()
             ]);
 
             return $stt->rowCount() === 1;

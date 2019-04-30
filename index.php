@@ -3,6 +3,7 @@ use Rapid\ConfigFile;
 
 // Include the Rapid library
 require_once('lib/Rapid.php');
+require_once('lib/Utils.php');
 DEFINE('BASE_DIR', ConfigFile::getContent()['ENV']);
 DEFINE('IMG_DIR', BASE_DIR."/assets/img/productImg/");
 // Create a new Router instance
@@ -30,6 +31,7 @@ $app->GET('/productedit', 'Productedit');
 $app->GET('/productdelete/(?<id>[0-9]+)', 'Productdelete');
 $app->GET('/productedit/(?<id>[0-9]+)', 'Productedit');
 $app->GET('/accountedit/(?<id>[0-9]+)', 'Accountedit');
+$app->GET('/reviewedit/(?<id>[0-9]+)', 'Reviewedit');
 
 $app->POST('/register', 'Register');
 $app->POST('/login', 'Login');
@@ -37,6 +39,7 @@ $app->POST('/product', 'Product');
 
 $app->POST('/accountedit/(?<id>[0-9]+)', 'Accountedit');
 $app->POST('/productedit', 'Productedit');
+$app->POST('/reviewedit/(?<id>[0-9]+)', 'Reviewedit');
 
 $app->dispatch();
 ?>

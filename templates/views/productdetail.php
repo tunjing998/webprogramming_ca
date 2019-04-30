@@ -7,17 +7,16 @@
     <p class="mb-1">Price   :<?= $locals['product']->getProductPrice() ?></p>
     <img src="<?= IMG_DIR . $locals['product']->getProductImageAddr() ?>" height="360px" width="360px">
 
-    <h5>Write A Review</h5>
+    <p><a href='<?= BASE_DIR ?>/reviewedit/<?=$locals['product']->getProductId() ?>'>Write A Review</a></p>
     <br>
     <h4>Other Reviews</h4>
     <?php foreach ($locals['review'] as $review) { ?>
         <div class="container">
-            <h5><?=$review->getClientId()?></h5>
-            <h5><?=$review->getReviewTitle()?></h5>
-            <p><?=$review->getReviewTitle()?></p>
-            <p><?=$review->getReviewText()?></p>
-            <p><?=$review->getSuggest()?></p>
-            <p><?=$review->getLastModified()?></p>
+            <p>Client ID          : <?=$review->getClientId()?></p>
+            <p>Title              : <?=$review->getReviewTitle()?></p>
+            <p>Content            : <?=$review->getReviewText()?></p>
+            <p>Rating             : <?=$review->getSuggest()?></p>
+            <p>Last Modified Date : <?=$review->getLastModified()?></p>
         </div>
     <?php } ?>
 </div>

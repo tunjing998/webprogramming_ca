@@ -7,7 +7,6 @@
                 <th>Nickname</th>
                 <th>Register Date</th>
                 <th>Show Account</th>
-                <th>Delete Account</th>
             </tr>
         </thead>
         <tbody>
@@ -18,7 +17,6 @@
                     <td><?= $client->getNickname() ?></td>
                     <td><?= $client->getRegisterdate() ?></td>
                     <td><a href='<?= BASE_DIR ?>/accountedit/<?= $client->getClientId() ?>'>Show Details</a></td>
-                    <td>Delete Product</td>
                 </tr>
             <?php } ?>
         </tbody>

@@ -1,13 +1,20 @@
 <?php return function($req, $res) {
 
-if(null==($req->session('id')))
+if(1==($req->session('id')))
 {
-    $res->redirect('/');
+    $layout = 'admin';
+}else if(null!=($req->session('id')))
+{
+    $layout = 'login';
+}
+else
+{
+  $res->redirect('/');
 }
 require_once 'models/Order.php';
 $orders = Order::findByClientId($req->session('id'));
 
-$res->render('login', 'order', [
+$res->render($layout, 'order', [
   'page_title' => 'My Order',
   'orders'=>$orders
 ]);

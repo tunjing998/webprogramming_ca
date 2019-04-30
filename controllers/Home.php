@@ -1,16 +1,7 @@
 <?php return function($req, $res) {
 require_once 'models/Product.php';
-if(1==($req->session('id')))
-{
-    $layout = 'admin';
-}else if(null!=($req->session('id')))
-{
-    $layout = 'login';
-}
-else
-{
-  $layout = 'main';
-}
+$layout=Utils::checkLayout($req->session('id'));
+
 $products = Product::findTenByRand();
 
 $res->render($layout, 'home', [

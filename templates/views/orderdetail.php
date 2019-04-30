@@ -9,6 +9,7 @@
                 <th>Product Name</th>
                 <th>Product Price</th>
                 <th>Quantity</th>
+                <th>Show Product</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@
                     <td><?= $product['product_name'] ?></td>
                     <td><?= $product['product_price'] ?></td>
                     <td><?= $product['quantity'] ?></td>
+                    <td><a href='<?= BASE_DIR ?>/product/<?= $product['product_id'] ?>'>Show Product</a>
                     <!-- <td>待发货</td> -->
                 </tr>
                 <?php

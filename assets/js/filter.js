@@ -27,8 +27,8 @@ $(document).ready(function () {
                             body.append(`
                 <div class="col-3 m-3 shadow bg-black border rounded product-item">
                         <img src="/wp_ca4_tunjingAng_xingnuoCen_emiliaCzubaj/assets/img/productImg/${element.product_img_address}" width="250px" height="250px">
-                        <p><?= ${element.product_name} ?></p>
-                        <p><?= ${element.product_price} ?></p>
+                        <p>Name  : <?= ${element.product_name} ?></p>
+                        <p>Price : <?= ${element.product_price} ?></p>
                         <a href='/wp_ca4_tunjingAng_xingnuoCen_emiliaCzubaj/product/${element.product_id}'>More Details </a>
                     </div>
                

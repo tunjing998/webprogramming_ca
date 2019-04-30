@@ -24,12 +24,10 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h1>Rainbow & Unicorn</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="navbar-brand" href="<?= BASE_DIR ?>">Rainbow & Unicorn</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= BASE_DIR ?>/productadmin">Product</a>
                     </li>
@@ -47,12 +45,34 @@
                     </li>
                 </ul>
             </div>
-
+            
         </nav>
 
     </header>
 
     <?= \Rapid\Renderer::VIEW_PLACEHOLDER ?>
 </body>
+<footer class="footer mt-3 py-3 border border-primary bg-secondary">
+    <div class="container" class='wrapper'>
+        <address>
+            <strong>Some Company, Inc.</strong><br>
+            007 street<br>
+            Some City, State XXXXX<br>
+            <abbr title="Phone">P:</abbr> (123) 456-7890
+        </address>
+        <address>
+            <strong>XINGNUOCEN</strong><br>
+            <a href="#">xingnuocen@123.com</a>
+        </address>
+    </div>
+    <div class="container">
+    <p>Follow us on
+        <i class="fab fa-facebook-square"></i>
+        <i class="fab fa-twitter-square"></i>
+        <i class="fab fa-instagram"></i>
+    </p>
+    </div>
+</footer>
+
 
 </html>

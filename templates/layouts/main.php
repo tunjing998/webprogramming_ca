@@ -30,9 +30,6 @@
           <a class="nav-link" href="<?= BASE_DIR ?>/product">Product</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= BASE_DIR ?>/contact">Contact</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" id="link_login" data-toggle="modal" data-target="#exampleModal">Login</a>
         </li>
       </ul>
@@ -86,5 +83,26 @@
   </header>
   <?= \Rapid\Renderer::VIEW_PLACEHOLDER ?>
 </body>
+<footer class="footer mt-3 py-3 border border-primary bg-secondary">
+    <div class="container" class='wrapper'>
+        <address>
+            <strong>Some Company, Inc.</strong><br>
+            007 street<br>
+            Some City, State XXXXX<br>
+            <abbr title="Phone">P:</abbr> (123) 456-7890
+        </address>
+        <address>
+            <strong>XINGNUOCEN</strong><br>
+            <a href="#">xingnuocen@123.com</a>
+        </address>
+    </div>
+    <div class="container">
+    <p>Follow us on
+        <i class="fab fa-facebook-square"></i>
+        <i class="fab fa-twitter-square"></i>
+        <i class="fab fa-instagram"></i>
+    </p>
+    </div>
+</footer>
 
 </html>

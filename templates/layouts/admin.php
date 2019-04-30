@@ -16,8 +16,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="<?= BASE_DIR ?>/assets/styles/main.css">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Alegreya|Chivo" rel="stylesheet">
 
 </head>
@@ -52,27 +50,6 @@
 
     <?= \Rapid\Renderer::VIEW_PLACEHOLDER ?>
 </body>
-<footer class="footer mt-3 py-3 border border-primary bg-secondary">
-    <div class="container" class='wrapper'>
-        <address>
-            <strong>Some Company, Inc.</strong><br>
-            007 street<br>
-            Some City, State XXXXX<br>
-            <abbr title="Phone">P:</abbr> (123) 456-7890
-        </address>
-        <address>
-            <strong>XINGNUOCEN</strong><br>
-            <a href="#">xingnuocen@123.com</a>
-        </address>
-    </div>
-    <div class="container">
-    <p>Follow us on
-        <i class="fab fa-facebook-square"></i>
-        <i class="fab fa-twitter-square"></i>
-        <i class="fab fa-instagram"></i>
-    </p>
-    </div>
-</footer>
 
 
 </html>

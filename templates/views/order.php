@@ -2,10 +2,10 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>orderid</th>
+				<th>Order Id</th>
 				<!-- <th>clientid</th> -->
-				<th>orderdate</th>
-				<th>orderstatus</th>
+				<th>Order Date</th>
+				<th>Order status</th>
 				<th>Show</th>
 			</tr>
 		</thead>

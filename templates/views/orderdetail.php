@@ -1,6 +1,6 @@
 <div class="container">
     <!-- <h3><?= $locals['order'][0]['order_id'] ?></h3> -->
-    <p class="mt-2"><?= $locals['order'][0]['order_date'] ?></p>
+    <p class="mt-2">OrderDate: <?= $locals['order'][0]['order_date'] ?></p>
     <table class="table">
         <thead>
             <tr>

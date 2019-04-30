@@ -127,15 +127,15 @@ class Product
             throw new Exception('Cannot delete a transient Product object');
         }
 
-        $stt = $pdo->prepare('DELETE FROM orders WHERE order_id = :order_id');
+        $stt = $pdo->prepare('DELETE FROM products WHERE product_id = :id');
         $stt->execute([
-            'order_id' => $this->getOrderId()
+            'id' => $this->getProductId()
         ]);
 
         $deleted = $stt->rowCount() === 1;
 
         if ($deleted) {
-            $this->setOrderId(NULL);
+            $this->setProductId(NULL);
         }
 
         return $deleted;

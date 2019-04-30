@@ -7,7 +7,6 @@
 				<th>orderdate</th>
 				<th>orderstatus</th>
                 <th>Show</th>
-                <th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,7 +33,6 @@
 						<td><?= $order->getOrderDate() ?></td>
 						<td><?= $order->getOrderStatus() ?></td>
 						<td><a href='<?= BASE_DIR ?>/order/<?= $order->getOrderId() ?>'>Show Order Details</a></td>
-						<td>Delete Order</td>
 					</tr>
 			<?php } ?>
 		</tbody>

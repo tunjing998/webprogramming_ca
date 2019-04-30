@@ -26,6 +26,8 @@ $app->GET('/productadmin','Productadmin');
 $app->GET('/orderadmin','Orderadmin');
 $app->GET('/accountadmin','Accountadmin');
 $app->GET('/reviewadmin','Reviewadmin');
+$app->GET('/productedit', 'Productedit');
+$app->GET('/productdelete/(?<id>[0-9]+)', 'Productdelete');
 $app->GET('/productedit/(?<id>[0-9]+)', 'Productedit');
 $app->GET('/accountedit/(?<id>[0-9]+)', 'Accountedit');
 
@@ -34,5 +36,7 @@ $app->POST('/login', 'Login');
 $app->POST('/product', 'Product');
 
 $app->POST('/accountedit/(?<id>[0-9]+)', 'Accountedit');
+$app->POST('/productedit', 'Productedit');
+
 $app->dispatch();
 ?>

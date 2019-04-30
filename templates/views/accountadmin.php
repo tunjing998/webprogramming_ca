@@ -7,7 +7,6 @@
                 <th>Nickname</th>
                 <th>Register Date</th>
                 <th>Show Account</th>
-                <th>Delete Account</th>
             </tr>
         </thead>
         <tbody>

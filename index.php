@@ -32,5 +32,7 @@ $app->GET('/accountedit/(?<id>[0-9]+)', 'Accountedit');
 $app->POST('/register', 'Register');
 $app->POST('/login', 'Login');
 $app->POST('/product', 'Product');
+
+$app->POST('/accountedit/(?<id>[0-9]+)', 'Accountedit');
 $app->dispatch();
 ?>

@@ -18,7 +18,6 @@
                     <td><?= $client->getNickname() ?></td>
                     <td><?= $client->getRegisterdate() ?></td>
                     <td><a href='<?= BASE_DIR ?>/accountedit/<?= $client->getClientId() ?>'>Show Details</a></td>
-                    <td>Delete Product</td>
                 </tr>
             <?php } ?>
         </tbody>

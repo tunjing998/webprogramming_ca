@@ -10,7 +10,6 @@
                 <th>Review Suggest</th>
                 <th>Last Modified Date</th>
                 <th>Show</th>
-                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +23,6 @@
                     <td><?= $review->getSuggest() ?></td>
                     <td><?= $review->getLastModified() ?></td>
                     <td><a href='<?= BASE_DIR ?>/reviewedit/<?= $review->getProductId() ?>'>Show Details</a></td>
-                    <td>Delete Review</td>
                 </tr>
             <?php } ?>
         </tbody>

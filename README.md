@@ -112,3 +112,12 @@ We use GIT for versioning. For the versions available, see the tags on this repo
 * **Emilia Czubaj**
 
 See our project GIT repository [here!](https://gitlab.comp.dkit.ie/D00198874/wp_ca4_tunjingAng_xingnuoCen_emiliaCzubaj)
+
+## Acknowledgments
+
+Inspirations/tutorials we followed while creating the project:
+1.  2018/2019 Web Programming, tutorial's notes/examples
+1.  https://www.youtube.com/watch?v=Ipa9xAs_nTg 
+1.  https://www.w3schools.com/php/php_file_upload.asp 
+1.  https://stackoverflow.com/questions/14069421/show-an-image-preview-before-upload
+1.  https://readmetips.github.io/

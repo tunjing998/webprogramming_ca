@@ -121,3 +121,10 @@ Inspirations/tutorials we followed while creating the project:
 1.  https://www.w3schools.com/php/php_file_upload.asp 
 1.  https://stackoverflow.com/questions/14069421/show-an-image-preview-before-upload
 1.  https://readmetips.github.io/
+
+## Ideas to develop
+
+*  'Write a Review' option on a Product card
+*  'Contact' web age/Google Maps feature
+*  'Feedback' optionally for Clients
+*  Using online gift cards feature

@@ -56,3 +56,14 @@ To test the project:
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - scripting, object orienteted language 
 * [AJAX](https://www.tutorialspoint.com/ajax/what_is_ajax.htm) - Asynchronous JavaScript and XML
 * [Bootstrap](https://getbootstrap.com/) - Open source toolkit for developing with HTML, CSS, and JS
+
+## More about using of a collaborative elements of GIT
+We are using a gitlab to keep track of any changes performed on a project repository by all of team members. We encourage you to use it too, if you working on a project within your team. Some examples of alternatives include: github or bitbucket. Belowe you can see some of the commands, which we used, while branching and merging in our git repository: 
+
+| Command | Description |
+| --- | --- |
+| `git status` | List all *new or modified* files |
+| `git checkout branch-name` | Create a **new** branch with *specific* name |
+| `git branch -d branch-name` | Delete a branch with a **specified** name |
+| `git checkout -b` | To create a new branch and switch into it in same time 
+| 

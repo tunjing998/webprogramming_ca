@@ -34,3 +34,17 @@ To open our project you need to install Xampp, Netbeans or VS Code. How to insta
 1.  Tick all needed modules: Apache and MySql
 
 To see instructions how to install Xampp on other machines [use this link!](https://www.apachefriends.org/download.html)
+
+## Running the tests
+
+To test the project:
+- [x] Make sure Modules: Apache and MySql in Xampp are running
+2. Go to your VS Code/Netbeans, open the project in your internet explorer for example: Chrome for Windows 10/8.1/8/7 (https://www.google.com/chrome/). 
+3. View web pages, start from home, products details, use the form to register a new account/Reset Password -> then you could test creating of the order and checking user account details. On admin account you can view/manage/delete a Clients. Create/check orders for a Client on an account page, use Search feature
+
+| Menu Item  | Description |
+|     ---:    |      :---:      |
+| Rainbow & Unicorn | Homepage  |
+| Product  | Product list/categories page  |
+| Login  | Secure login system/ Sign up/Forgot username/password |
+

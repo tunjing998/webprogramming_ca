@@ -38,6 +38,9 @@
                         <a class="nav-link" href="<?= BASE_DIR ?>/account">Account</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="link_login" data-toggle="modal" data-target="#cart"><i class="fas fa-shopping-cart"></i></i></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="<?= BASE_DIR ?>/logout">Logout</a>
                     </li>
                 </ul>
@@ -47,7 +50,7 @@
                 </form>
             </div>
         </nav>
-
+        <?php include_once('templates/layouts/cart.php'); ?>
     </header>
 
     <?= \Rapid\Renderer::VIEW_PLACEHOLDER ?>
@@ -66,11 +69,11 @@
         </address>
     </div>
     <div class="container">
-    <p>Follow us on
-        <i class="fab fa-facebook-square"></i>
-        <i class="fab fa-twitter-square"></i>
-        <i class="fab fa-instagram"></i>
-    </p>
+        <p>Follow us on
+            <i class="fab fa-facebook-square"></i>
+            <i class="fab fa-twitter-square"></i>
+            <i class="fab fa-instagram"></i>
+        </p>
     </div>
 </footer>
 

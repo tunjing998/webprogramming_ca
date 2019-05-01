@@ -38,7 +38,7 @@ To see instructions how to install Xampp on other machines [use this link!](http
 ## Running the tests
 
 To test the project:
-- [x] Make sure Modules: Apache and MySql in Xampp are running
+1. Make sure Modules: Apache and MySql in Xampp are running
 2. Go to your VS Code/Netbeans, open the project in your internet explorer for example: Chrome for Windows 10/8.1/8/7 (https://www.google.com/chrome/). 
 3. View web pages, start from home, products details, use the form to register a new account/Reset Password -> then you could test creating of the order and checking user account details. On admin account you can view/manage/delete a Clients. Create/check orders for a Client on an account page, use Search feature
 
@@ -48,3 +48,11 @@ To test the project:
 | Product  | Product list/categories page  |
 | Login  | Secure login system/ Sign up/Forgot username/password |
 
+## Built With Technologies
+
+* [VS Code](https://code.visualstudio.com/download) - Source code editor
+* [Xampp](https://www.apachefriends.org/index.html) - PHP development environment
+* [Netbeans](https://netbeans.org/) - Open-source IDE
+* [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - scripting, object orienteted language 
+* [AJAX](https://www.tutorialspoint.com/ajax/what_is_ajax.htm) - Asynchronous JavaScript and XML
+* [Bootstrap](https://getbootstrap.com/) - Open source toolkit for developing with HTML, CSS, and JS

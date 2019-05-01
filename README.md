@@ -95,3 +95,8 @@ The Model View Controller architecture is often used in a web development to pro
 }
 ?>
 ```
+
+## AJAX in JavaScript
+Asynchronous JavaScript and XML AJAX is a new technique for creating more interactive web applications with the usage of XML, HTML, CSS, and Java Script. We used this effective feature for example in the Filter.js, see screenshot:
+
+![Screenshot from the Filter.js:](/assets/img/Capture3.jpg)

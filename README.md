@@ -65,8 +65,8 @@ We are using a gitlab to keep track of any changes performed on a project reposi
 | `git status` | List all *new or modified* files |
 | `git checkout branch-name` | Create a **new** branch with *specific* name |
 | `git branch -d branch-name` | Delete a branch with a **specified** name |
-| `git checkout -b` | To create a new branch and switch into it in same time 
-| 
+| `git checkout -b` | To create a new branch and switch into it in same time | 
+
 ## More about MVC
 The Model View Controller architecture is often used in a web development to promote of the creation of tidy code with separated database interactions-Model from Controller-application control logic. Below is the example of function used for registering of a new Client:
 ```

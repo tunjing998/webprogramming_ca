@@ -5,3 +5,17 @@ In this project our team built a **Remote Hosted Website** on a topic: **TBD -To
 Click to see our last version [here!](http://google.com)
 
 ![Screenshot of the Product web page.](/assets/img/Capture2.jpg)
+
+On this page:
+
+* [Getting Started](#getting-started)
+* [Prerequisites & Installing](#prerequisites-&-installing)
+* [Running the tests](#running-the-tests)
+* [Built With Technologies](#built-with-technologies)
+* [More about using of a collaborative elements of GIT](#more-about-using-of-a-collaborative-elements-of-git)
+* [More about MVC](#more-about-mvc)
+* [AJAX in JavaScript](#ajax-in-javascript)
+* [Versioning](#versioning)
+* [Authors](#authors)
+* [Acknowledgments](#acknowledgments)
+* [Ideas to develop](#ideas-to-develop)

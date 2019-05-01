@@ -19,3 +19,7 @@ On this page:
 * [Authors](#authors)
 * [Acknowledgments](#acknowledgments)
 * [Ideas to develop](#ideas-to-develop)
+
+## Getting Started
+
+You can get a copy of our project to a folder htdocs on your computer (usually C:\xampp\htdocs). Run the Modules: Apache and MYSQL under the XAMPP development environment. Import the database wp_ca4_tunjingAng_xingnuoCen.sql to MySQL module of a phpAdmin for testing/demo purposes. In the Netbeans open a project and navigate to folder: wp_ca4_tunjingAng_xingnuoCen_emiliaCzubaj in the htdocs folder. Run Project or press F6 to run.

@@ -19,6 +19,7 @@ $app->GET('/order', 'Order');
 $app->GET('/account', 'Account');
 $app->GET('/product', 'Product');
 $app->GET('/logout', 'Logout');
+$app->GET('/checkout', 'Checkout');
 $app->GET('/product/(?<id>[0-9]+)', 'Productdetail');
 $app->GET('/order/(?<id>[0-9]+)','Orderdetail');
 $app->GET('/review/(?<id>[0-9]+)','Reviewdetail');

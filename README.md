@@ -67,3 +67,31 @@ We are using a gitlab to keep track of any changes performed on a project reposi
 | `git branch -d branch-name` | Delete a branch with a **specified** name |
 | `git checkout -b` | To create a new branch and switch into it in same time 
 | 
+## More about MVC
+The Model View Controller architecture is often used in a web development to promote of the creation of tidy code with separated database interactions-Model from Controller-application control logic. Below is the example of function used for registering of a new Client:
+```
+<?php return function ($req, $res) {
+    require_once 'models/Account.php';
+    $args = [
+        'username' => $req->body('username'),
+        'email'   => $req->body('email'),
+        'passcode' => $req->body('passcode')
+    ];
+    $form_posted = (!$args['username'] == null);
+    if ($form_posted) {
+        require_once 'models/Account.php';
+        $success = false;
+        if ($req->body('passcode') === $req->body('passcodeConfirm')) {
+            $account = new Account($args);
+            $success = $account->save();
+        }
+        if ($success) {
+            $res->redirect('/');
+        } else {
+            $args['error'] = 'Username or Email had been used';
+        }
+    }
+    $res->render('main', 'register_form', $args);
+}
+?>
+```
